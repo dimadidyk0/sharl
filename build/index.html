@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PRODUCT</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic" rel="stylesheet">
+</head>
+<style>
+    .preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: #005;
+        z-index: 1000;
+    }
+    .preloader span {
+        background: red;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 20px;
+        border-radius: 10px;
+    }
+
+
+</style>
+<body>
+    <div class="preloader">
+        <span></span>
+    </div>
+    <div id="layout"></div>
+    <header>
+        <nav class="nav-main">
+            <a href="#">item-1</a>
+            <a href="#">item-2</a>
+            <a href="#">item-3</a>
+            <a href="#">item-4</a>
+            <a href="#">item-5</a>
+        </nav>
+    </header>
+
+	<div class="main">
+		<img src="/img/gif/cogwheel-l.gif" alt="" class="main__wheel--left">
+		<img src="/img/gif/cogwheel-l.gif" alt="" class="main__wheel--right">
+		<img src="/img/gif/main.gif" alt="" class="main__main">
+		<img src="/img/gif/logo.gif" alt="" class="main__logo">
+	</div>
+
+	<script src="js/main.js"></script>		
+</body>
+</html>

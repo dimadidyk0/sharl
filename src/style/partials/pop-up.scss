@@ -1,0 +1,93 @@
+#layout {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1;
+}
+
+.place-order {
+    position: absolute;
+    height: 790px;
+    width: 850px;
+    margin: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    overflow: hidden;
+    display: none;
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 347px;
+        margin: 0 auto;
+        height: 450px;
+        left: 0;
+        right: -5px;
+        bottom: 350px;
+        position: absolute;
+        z-index: 2;
+        border: 0;
+        outline: 0;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    h2 {
+        font: 600 32px/43px 'Playfair Display', serif;
+        color: #535353;
+        text-align: center;
+        padding: 10px 0 25px;
+    }
+    label {
+        color: #3F3F3F;
+        font: 400 14px/16px 'Roboto';
+    }
+    input[name] {
+        outline: 0;
+        height: 23px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #979797;
+        margin-bottom: 34px;
+        font: 400 13px/18px 'Roboto';
+        color: #000;
+    }
+    input[type="submit"] {
+        height: 88px;
+        width: 172px;
+        border: none;
+        margin: 0 auto;
+        background: transparent;
+        font: 400 18px/21px 'Roboto';
+        text-transform: uppercase;
+        color: #535353;
+        padding-top: 0;
+        background: url(/img/order-img.png) no-repeat;
+        padding-bottom: 14px;
+        cursor: pointer;
+    }
+}
+
+.place-order__img-container {
+    width: 850px;
+    height: 790px;
+    position: absolute;
+    margin: 0 auto;
+    display: block;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/img/typewriter.png') no-repeat;
+    background-size: cover;
+    img {
+        width: 100%;
+        height: 100%;
+        // visibility: hidden;
+        opacity: 0;
+        transition: all .2s ease-in 0s;
+        margin: 1px 0 0 0;
+    }
+}
+
+

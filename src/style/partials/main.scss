@@ -1,0 +1,40 @@
+.main {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    background-color: black;
+    background-image: radial-gradient(700px, #7b04ff, #000);
+}
+.main__wheel--left {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.main__wheel--right {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    transform: scaleX(-1);
+}
+.main__main {
+    position: absolute;
+    left: 0; 
+    right: 0;
+    bottom: 0; 
+    top: 0;
+    margin: auto;
+    width: 800px;
+}
+.main__logo {
+    position: absolute;
+    top: 27px;
+    bottom: 0;
+    left: 0px;
+    right: 0px;
+    margin: auto auto;
+    height: 85px;
+}

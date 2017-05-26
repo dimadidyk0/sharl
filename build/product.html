@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PRODUCT</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic" rel="stylesheet">
+</head>
+<style>
+    .preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: #005;
+        z-index: 1000;
+    }
+    .preloader span {
+        background: red;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: 20px;
+        border-radius: 10px;
+    }
+
+
+</style>
+<body>
+    <div class="preloader">
+        <span></span>
+    </div>
+    <div id="layout"></div>
+    <header>
+        <nav class="nav-main">
+            <a href="#">item-1</a>
+            <a href="#">item-2</a>
+            <a href="#">item-3</a>
+            <a href="#">item-4</a>
+            <a href="#">item-5</a>
+        </nav>
+    </header>
+
+<div class="product">
+
+    <div class="product__container">
+        <div class="product__face">
+            <ul>
+                <li><img src="http://lorempixel.com/400/200/" alt=""></li>
+                <li><video src="/img/video/header.mp4"></video></li>
+            </ul>
+        </div>
+
+        <div class="product__info-block">
+            <span class="product__year">2008</span>
+            <h3 class="product__name" title="LA BOÎTE DE PANDOR"><span>LA BOÎTE DE PANDOR</span></h3>
+            <p class="product__description">Magnifique boîte métallique à multiples combinaisons d'ouverture.</p>
+
+            <ul class="product__parameters">
+                <li><span>Material:</span> rose</li>
+                <li><span>Material:</span> rose</li>
+            </ul>
+            <div class="product__buy-block">
+                <div class="product__price">7999</div>
+                <input type="button" class="product__btn" value="buy">
+            </div>
+        </div>
+    </div>
+
+    <ul class="product__slides">
+        <li><img src="http://lorempixel.com/400/200/" alt=""></li>
+        <li><video src="/img/video/header.mp4"></video></li>
+    </ul>
+</div>
+
+
+
+    <div id="order-pop-up" class="pop-up place-order">
+        <form action="">
+            <h2>Place order</h2>
+            <label for="name">Full name</label>
+            <input type="text" name="name" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" required>
+            <label for="phone">Mobile</label>
+            <input type="text" name="phone">
+            <input class="place-order__submit" type="submit" value="order">
+        </form>
+        <div class="place-order__img-container">
+            <img alt="" src="/img/typewriter.gif">
+        </div>
+    </div>
+        
+    <script src='js/main.js'></script>
+</body>
+
+</html>
