@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .main {
     height: 100%;
     width: 100%;
@@ -37,4 +41,312 @@
     right: 0px;
     margin: auto auto;
     height: 85px;
+}
+
+/* #########################
+########   MACHINE   #######
+######################### */
+
+.machine {
+    width: 1365px;
+    margin: 0 auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.machine__slider {
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    display: flex;
+    display: relative;
+    li {
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+     img {
+         height: 100%;
+         width: 100%;
+         object-fit: contain;
+     }
+}
+
+li.current-slide {
+    opacity: 1;
+}
+
+.machine__main-img  { 
+    width: 100%;
+}
+
+.machine__slider-container {
+    position: absolute;
+    height: 425px;
+    width: 550px;
+    top: 130px;
+    overflow: hidden;
+    left: 315px;
+    border-radius: 35px;
+}
+.machine__slider-controls {
+    position: absolute;
+    bottom: 160px;
+    left: -180px;
+    right: 0;
+    width: 330px;
+    margin: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    li {
+        height: 100%;
+        cursor: pointer;
+    }
+    img {
+        height: 80%;
+    }
+}
+
+.machine__product-controls {
+    width: 460px;
+    position: absolute;
+    bottom: 74px;
+    margin: 0 auto;
+    left: -180px;
+    right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.machine__date {
+    height: 81px;
+    width: 106px;
+    padding-top: 1px;
+    box-sizing: border-box;    
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    top: 142px;
+    right: 217px;
+    margin: auto;
+    color: black;
+    font: 23px/35px 'Roboto';
+    letter-spacing: 14px;
+    text-indent: 6px;
+    font-weight: 600;
+    background: url(/img/wheel-clear.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    // span {
+    //     width: 26px;
+    //     position: absolute;
+    //     padding-left: 9px;
+    //     box-sizing: border-box;
+    //     top: 0;
+    //     text-indent: 0;
+    //     line-height: 23px;
+    //     font-size: 17px;
+    //     height: 65px;
+    //     overflow: hidden;
+    //     margin-top: 7px;
+    // }
+}
+
+.button {
+    background-image: url(/img/mach-btn/normal.png);
+    background-size: cover;
+    height: 59px;
+    width: 147px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in;
+    color: black;
+    font: 18px/18px "Roboto";
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.button:hover {
+    background-image: url(/img/mach-btn/hover.png);
+}
+
+.button:active {
+    background-image: url(/img/mach-btn/pressed.png);
+    transition: all 0.1s ease-in;
+}
+
+.button::selection ,
+img::selection {
+    color: inherit; 
+    background: inherit; 
+}
+
+.gallery-projector {
+    transition: all 0.5s ease-in-out;  
+    bottom: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 100%;
+}
+
+.gallery-projector__sheet {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.gallery-projector__light {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+}
+
+.gallery-projector__projector {
+    background-image: url(/img/projector/projector.png);
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 253px;
+    width: 378px;
+    margin: auto;
+    background-repeat: no-repeat;
+}
+.gallery-projector__slider {
+    position: absolute;
+    width: 900px;
+    height: calc(100% - 250px);
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: white;
+    bottom: 200px;
+    box-sizing: border-box;
+    border: 8px solid black;
+    overflow: hidden;
+    box-shadow: 0px 20px 500px 0px rgba(243, 243, 243, 0.5);
+    li {
+        height: 100%;
+        width: 100%;
+        box-shadow: 0px 20px 50px 0px rgba(243, 243, 243, 0.5);
+    } 
+    img, video {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        object-fit: contain;
+        background: white;
+    } 
+    video {
+        background: black;
+    }
+}
+
+.gallery-projector__controls {
+    position: absolute;
+    width: 270px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 14px;
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        cursor: pointer;
+    }
+}
+
+.gallery-projector__back {
+    position: absolute;
+    bottom: 50px;
+    left: 15%;
+}
+
+
+
+// ADAPTIVE syles
+
+.machine {
+    height: 85vh;
+    width: 128vh;
+}
+.machine__slider-container {
+    height: 47%;
+    width: 40.5%;
+    top: 14.2%;
+    left: 23%;
+}
+
+.machine__date {
+    height: 9.815%;
+    width: 8.425%;
+    top: 15.3%;
+    right: 15.2%;
+}
+.machine__slider-controls {
+    bottom: 18%;
+    left: -13%;
+    width: 24.176%;
+    height: 11.027%;
+}
+.machine__slider-controls { 
+    li {
+        height: 80%;
+    }
+    img {
+        height: 100%;
+    }
+}
+li.machine__play-pause {
+    height: 100%;
+}
+.machine__product-controls {
+    width: 33.7%;
+    height: 9.042%;
+    left: -13%;
+    bottom: 8%;
+}
+.machine__product-controls .button {
+    height: 72%;
+    width: 32%;
 }

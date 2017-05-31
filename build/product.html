@@ -17,49 +17,42 @@
         top: 0;
         height: 100%;
         width: 100%;
-        background: #005;
+        background-color: black;
+        background-image: radial-gradient(700px, #6d75ff, #000);
         z-index: 1000;
     }
-    .preloader span {
-        background: red;
-        position: absolute;
+    .preloader img {
+        position:  absolute;
         left: 0;
         right: 0;
         top: 0;
         bottom: 0;
         margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 200px;
-        height: 20px;
-        border-radius: 10px;
     }
 
 
 </style>
 <body>
     <div class="preloader">
-        <span></span>
+        <span><img src="/img/gif/loading.gif" alt=""></span>
     </div>
     <div id="layout"></div>
     <header>
         <nav class="nav-main">
-            <a href="#">item-1</a>
-            <a href="#">item-2</a>
-            <a href="#">item-3</a>
-            <a href="#">item-4</a>
-            <a href="#">item-5</a>
+            <a class='button' href="#">item-1</a>
+            <a class='button' href="#">item-2</a>
+            <a class='button' href="#">item-3</a>
+            <a class='button' href="#">item-4</a>
+            <a class='button' href="#">item-5</a>
         </nav>
     </header>
 
 <div class="product">
-
     <div class="product__container">
         <div class="product__face">
             <ul>
                 <li><img src="http://lorempixel.com/400/200/" alt=""></li>
-                <li><video src="/img/video/header.mp4"></video></li>
+                <li><video autoplay muted src="/img/video/header.mp4"></video></li>
             </ul>
         </div>
 
@@ -83,6 +76,8 @@
         <li><img src="http://lorempixel.com/400/200/" alt=""></li>
         <li><video src="/img/video/header.mp4"></video></li>
     </ul>
+
+
 </div>
 
 
