@@ -1,29 +1,30 @@
-// #########################
-// ##     PREVIEW       ####
-// #########################
 var thisDoc = document;
 
-function setPreloader() {
-    let 
-        images             = thisDoc.images, 
-        images_total_count = images.length,
-        images_load_count  = 0,
-        counter = thisDoc.querySelector('.preloader span');
+// #########################
+// ##      PRELOADER      ##
+// #########################
 
-    for (let i = 0; i < images_total_count; i++) {
-        let 
-            image_clone = new Image();
-            image_clone.onload = image_loaded;
-            image_clone.onerror = image_loaded;
-            image_clone.src = images[i].src;
-    }
+// function setPreloader() {
+//     let 
+//         images             = thisDoc.images, 
+//         images_total_count = images.length,
+//         images_load_count  = 0,
+//         counter = thisDoc.querySelector('.preloader span');
 
-    function image_loaded() {
-        images_load_count++;
-    }
-}
+//     for (let i = 0; i < images_total_count; i++) {
+//         let 
+//             image_clone = new Image();
+//             image_clone.onload = image_loaded;
+//             image_clone.onerror = image_loaded;
+//             image_clone.src = images[i].src;
+//     }
 
-setPreloader();
+//     function image_loaded() {
+//         images_load_count++;
+//     }
+// }
+
+// function for preloader to show progress
 
 // #########################
 // ####     MACHINE     ####
@@ -31,9 +32,9 @@ setPreloader();
 
 window.onload = function() {
 
-    thisDoc.querySelector('.preloader').remove();
-
-    
+    let preloader = thisDoc.querySelector('#preloader')
+    if (preloader) preloader.remove();
+    else console.log('Preloader not found')
 
     if (thisDoc.querySelector('.machine__slider')) {
         let machineSliderObj = {
@@ -43,7 +44,7 @@ window.onload = function() {
             playPause   : thisDoc.querySelector('.machine__play-pause')
         }
 
-        setListSlider(machineSliderObj, true);
+        setListSlider(machineSliderObj, true, true);
     }
 
 }
@@ -71,7 +72,7 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
             orderBtn    = thisDoc.querySelector('input[type="button"]');
 
         orderBtn.onclick = function() { showHideLayout(layout, orderPopUp) };
-        layout.onclick = function() { showHideLayout(layout, orderPopUp) };
+        layout.onclick   = function() { showHideLayout(layout, orderPopUp) };
     }
 
     // #########################
@@ -88,19 +89,15 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
 
         previewList.forEach( (li,i)  => {
 
-            if (li.querySelector('video') || li.querySelector('iframe')) {
-                faceList[i].style.opacity = '1';
-            } else {
-                faceList[0].style.opacity = '1';
-            }
-
+            if (li.querySelector('video')) faceList[i].style.opacity = '1';
+            else faceList[0].style.opacity = '1';
+            
             li.onclick = function() {
                 let previous = face.querySelector('[style]');
                 if (previous) previous.removeAttribute('style');
                 faceList[i].style.opacity = '1';
             }
         }); 
-
 
         // ### PRICE #####
         let price       = product.querySelector('.product__price'),
@@ -145,7 +142,7 @@ function off(timeout) {
 // ##     PROJECTOR     ####
 // #########################
 
-function setListSlider(obj, date) {
+function setListSlider(obj, date, yearSlider) {
     
     let 
         slider      = obj.slider, 
@@ -157,7 +154,9 @@ function setListSlider(obj, date) {
         playing     = true;
 
     slides[0].classList.add('current-slide');
+
     if (date) changeProductDate();
+    
     function nextSlide() {
         slides[current].classList.remove('current-slide');
         current = (current + slides.length + 1) % slides.length;
@@ -173,8 +172,24 @@ function setListSlider(obj, date) {
     };
 
     function changeProductDate() {
-        let dateBlock = document.querySelector('.machine__date');
-        dateBlock.innerHTML = thisDoc.querySelector('.current-slide').getAttribute('data-year');
+        let 
+            dateBlock = document.querySelector('.machine__date-inner'),
+            dateLampBlock = document.querySelector('.machine__lamp-date');
+            date = thisDoc.querySelector('.current-slide').getAttribute('data-year'),
+            dateArr =  date.split('');
+
+        dateBlock.innerHTML = date;
+        dateLampBlock.innerHTML = '';
+            
+        dateArr.forEach(i => {
+            let span = thisDoc.createElement('span');
+            span.setAttribute('data-content', i);
+            span.innerHTML = i;
+            if (i === '.') i = 'point';
+            span.style.backgroundImage = `url(/img/price-${i}.png)`;
+            dateLampBlock.appendChild(span);
+        });
+
     } 
 
     nextBtn.onclick = function() {
@@ -216,31 +231,57 @@ function setListSlider(obj, date) {
 
     photosBtn.onclick = function() {
         pauseSlideShow();
-        changeBlockPosition();
+        showHideProjector();
         getProductImages();
         buildProjectorSlider();
     }
 
     videoBtn.onclick = function() {
         pauseSlideShow();
-        changeBlockPosition();
+        showHideProjector();
         getProductVideo();
     }
 
 
     zoom.onclick = function() {
         pauseSlideShow();
-        changeBlockPosition();
+        showHideProjector();
         getProductImages();
         buildProjectorSlider();
     };
+
+    
+
+    if (yearSlider) {
+        function setNextSlide(sign) {
+            pauseSlideShow();
+            
+            let 
+                currentSlide = thisDoc.querySelector('.current-slide'),
+                currentYear  = currentSlide.getAttribute('data-year'),
+                nextSlide    = getNextSlide(sign, currentYear);
+
+            currentSlide.classList.remove('current-slide');
+            nextSlide.classList.add('current-slide');
+
+
+            if (date) changeProductDate();
+
+            let slides = Array.from(slider.querySelectorAll('li'));
+            current = slides.indexOf(nextSlide);
+        }
+
+        thisDoc.querySelector('.machine__date-prev').onclick = function() {setNextSlide('-')};
+        thisDoc.querySelector('.machine__date-next').onclick = function() {setNextSlide('+')};
+        
+    }
 };
 
 
 var json = JSON.stringify({
 
     "product-1" : {
-        "year"  : "5000",
+        "year"  : "2000",
         "images": ["/img/price-1.png","/img/price-2.png","/img/price-3.png","/img/price-4.png"], 
         "video" : "/img/video/header.mp4",
         "self"  : "product-1",
@@ -269,36 +310,77 @@ var json = JSON.stringify({
         "video" : "/img/video/header.mp4",
         "self"  : "product-4",
         "title" : "title-14"
+    },
+
+    "product-5" : {
+        "year"  : "2003",
+        "images": ["/img/price-5.png","/img/price-6.png","/img/price-7.png","/img/price-8.png"], 
+        "video" : "/img/video/header.mp4",
+        "self"  : "product-4",
+        "title" : "title-14"
+    },
+
+    "product-6" : {
+        "year"  : "2003",
+        "images": ["/img/price-6.png","/img/price-7.png","/img/price-8.png","/img/price-9.png"], 
+        "video" : "/img/video/header.mp4",
+        "self"  : "product-4",
+        "title" : "title-14"
     }
 });
 
-var 
-    parsedJSON  = JSON.parse(json),
-    keys        = Object.keys(parsedJSON);
 
-keys.forEach(k => {
-    let obj = parsedJSON[k];
-    localStorage.setItem(obj.self, JSON.stringify(obj));
+function getProducts() {
 
-    let 
-        item    = thisDoc.createElement('li'),
-        img     = thisDoc.createElement('img');
+    var 
+        parsedJSON  = JSON.parse(json),
+        keys        = Object.keys(parsedJSON),
+        years       = {};
 
-    img.setAttribute('src', obj.images[0]);
-    img.setAttribute('alt', obj.title || 'Product image');
-    img.setAttribute('title', obj.title || 'Product image');
+    keys.forEach(k => {
+        let obj = parsedJSON[k];
+        localStorage.setItem(obj.self, JSON.stringify(obj));
 
-    item.appendChild(img);
-    item.setAttribute('data-key', obj.self);
-    item.setAttribute('data-year', obj.year);
-    
-    thisDoc.querySelector('.machine__slider').appendChild(item);
+        let 
+            item    = thisDoc.createElement('li'),
+            img     = thisDoc.createElement('img');
 
-});
+        img.setAttribute('src', obj.images[0]);
+        img.setAttribute('alt', obj.title || 'Product image');
+        img.setAttribute('title', obj.title || 'Product image');
+
+        item.appendChild(img);
+        item.setAttribute('data-key', obj.self);
+        item.setAttribute('data-year', obj.year);
+        
+        thisDoc.querySelector('.machine__slider').appendChild(item);
+
+        years[obj.year] = true;
+    });
+
+    localStorage.setItem('years', Object.keys(years));
+
+}
+function getNextSlide(sign, year) {
+    var 
+        sequent = '',
+        years   = localStorage.getItem('years').split(','),
+        current = +years.indexOf(year);
+
+    if (sign == '-')        sequent = (current + years.length - 1) % years.length;
+    else if (sign == '+')   sequent = (current + years.length + 1) % years.length;
+
+    else {
+        console.log('sign is not correct. sign can be "+" or "-"')
+        return false;
+    }
+
+    return thisDoc.querySelector('.machine [data-year="' + years[sequent] +'"]');
+}
 
 
 
-function changeBlockPosition() {
+function showHideProjector() {
     let 
         machine     = thisDoc.querySelector('.machine'),
         projector   = thisDoc.querySelector('.gallery-projector'),
@@ -366,3 +448,4 @@ function buildProjectorSlider() {
 
     setListSlider(projectorSliderObj);
 }
+

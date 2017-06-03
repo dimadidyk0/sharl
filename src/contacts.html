@@ -1,0 +1,29 @@
+//= template/header.html
+
+    <div class="contacts">
+        <img src="/img/contacts@1x.png" srcset='"/img/contacts@2x.png 2x' alt="MOrgan contacts background" class="contacts__main-img">
+
+        <div id="contacts__map"></div>
+    </div>
+    <input type="button" style="position: absolute; height: 40px; width:200px; top: 0px;">
+    <script>
+        function myMap() {
+        var a = +localStorage.getItem('zoom');
+        var mapProp= {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom: a || 15,
+        };
+
+        let btn = document.querySelector('input');
+        btn.onclick = function() {
+            let a  = mapProp.zoom + 1;
+            localStorage.setItem('zoom', a);
+            myMap();
+        }
+        var map = new google.maps.Map(document.getElementById("contacts__map"),mapProp);
+        }
+    </script>
+	<script src="js/main.js"></script>		
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjkLgSteJt6s_PtHPcfi4jf44Gf4ZDZ8Q&callback=myMap"></script>
+</body>
+</html>

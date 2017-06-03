@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic" rel="stylesheet">
 </head>
 <style>
-    .preloader {
+    #preloader {
         position: fixed;
         left: 0;
         top: 0;
@@ -21,7 +21,7 @@
         background-image: radial-gradient(700px, #6d75ff, #000);
         z-index: 1000;
     }
-    .preloader img {
+    #preloader img {
         position:  absolute;
         left: 0;
         right: 0;
@@ -33,16 +33,20 @@
 
 </style>
 <body>
-    <div class="preloader">
-        <span><img src="/img/gif/loading.gif" alt=""></span>
+    <div id="preloader"> 
+        <img src="/img/gif/loading.gif" alt=""> 
     </div>
+    
     <div id="layout"></div>
     <header>
-        <nav class="nav-main">
-            <a class='button' href="#">item-1</a>
-            <a class='button' href="#">item-2</a>
-            <a class='button' href="#">item-3</a>
-            <a class='button' href="#">item-4</a>
-            <a class='button' href="#">item-5</a>
+        <nav class="nav-main">  
+            <img src="/img/gif/alarm.gif" alt="" class="header__alarm">
+            <img src="/img/gif/header-coin.gif" alt="" class="heaer__coin">
+            <img src="/img/gif/header-cube.gif" alt="" class="header__cube">
+            <a class='button' href="#">Sculptor</a>
+            <a class='button' href="/gallery.html">Gallery</a>
+            <a class='button' href="#">Shop</a>
+            <a class='button' href="#">News</a>
+            <a class='button' href="#">Contacts</a>
         </nav>
     </header>

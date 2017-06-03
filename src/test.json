@@ -1,0 +1,49 @@
+ {
+    "product-1" : {
+        "year"  : "2000",
+        "images": ["/img/price-1.png","/img/price-2.png","/img/price-3.png","/img/price-4.png"], 
+        "video" : "/img/video/header.mp4",
+        "self"  : "product-1",
+        "title" : "title-11"
+    },
+
+    "product-2" : {
+        "year"  : "2001",
+        "images": ["/img/price-2.png","/img/price-3.png","/img/price-4.png","/img/price-5.png"], 
+        "video" : "/img/video/header.mp4",
+        "self"  : "product-2",
+        "title" : "title-12"
+    },
+
+    "product-3" : {
+        "year"  : "2002",
+        "images": ["/img/price-3.png","/img/price-4.png","/img/price-5.png","/img/price-6.png"], 
+        "video" : "/img/video/header.mp4",
+        "self"  : "product-3",
+        "title" : 30
+    },
+
+    "product-4" : {
+        "year"  : "2003",
+        "images": ["/img/price-4.png","/img/price-5.png","/img/price-6.png","/img/price-7.png"], 
+        "video" : "/img/video/header.mp4",
+        "self"  : "product-4",
+        "title" : "title-14"
+    },
+
+    "product-5" : {
+        "year"  : "2003",
+        "images": ["/img/price-5.png","/img/price-6.png","/img/price-7.png","/img/price-8.png"], 
+        "video" : "/img/video/header.mp4",
+        "self"  : "product-4",
+        "title" : "title-14"
+    },
+
+    "product-6" : {
+        "year"  : "2003",
+        "images": ["/img/price-6.png","/img/price-7.png","/img/price-8.png","/img/price-9.png"], 
+        "video" : "/img/video/header.mp4",
+        "self"  : "product-4",
+        "title" : "title-14"
+    }
+ }

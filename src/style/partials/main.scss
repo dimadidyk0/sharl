@@ -9,7 +9,7 @@ body {
     top: 0;
     z-index: 10;
     background-color: black;
-    background-image: radial-gradient(700px, #7b04ff, #000);
+    background-image: radial-gradient(65vh, #7b04ff, #000);
 }
 .main__wheel--left {
     position: absolute;
@@ -31,16 +31,16 @@ body {
     bottom: 0; 
     top: 0;
     margin: auto;
-    width: 800px;
+    width: 100vh;
 }
 .main__logo {
     position: absolute;
-    top: 27px;
+    top: 3.4vh;
     bottom: 0;
     left: 0px;
     right: 0px;
     margin: auto auto;
-    height: 85px;
+    height: 11vh;
 }
 
 /* #########################
@@ -137,39 +137,58 @@ li.current-slide {
 }
 
 .machine__date {
-    height: 81px;
-    width: 106px;
-    padding-top: 1px;
+    height: 9.815%;
+    width: 8.425%;
+    top: 15.3%;
+    right: 15.2%;
+    margin: auto;
     box-sizing: border-box;    
     position: absolute;
+}
+.machine__date-inner {
+    color: black;
+    font: 600 2vh/35px 'Roboto';
+    text-indent: .9vh;
+    letter-spacing: 1.56vh;
+
+    height: 100%;
+    padding-top: 1px;
+    align-items: center;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    top: 142px;
-    right: 217px;
-    margin: auto;
-    color: black;
-    font: 23px/35px 'Roboto';
-    letter-spacing: 14px;
-    text-indent: 6px;
-    font-weight: 600;
+    position: relative;
+    z-index: 1;
+
     background: url(/img/wheel-clear.png);
     background-size: cover;
     background-repeat: no-repeat;
-    // span {
-    //     width: 26px;
-    //     position: absolute;
-    //     padding-left: 9px;
-    //     box-sizing: border-box;
-    //     top: 0;
-    //     text-indent: 0;
-    //     line-height: 23px;
-    //     font-size: 17px;
-    //     height: 65px;
-    //     overflow: hidden;
-    //     margin-top: 7px;
-    // }
+    
 }
+
+.machine__date-next {
+    position: absolute;
+    top: -34%;
+    height: 64%;
+    width: 100%;
+    left: 1%;
+    background: url(/img/wheel-plus.png);
+    background-size: contain;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.machine__date-prev {
+    position: absolute;
+    bottom: -34%;
+    height: 64%;
+    width: 100%;
+    left: 1%;
+    background: url(/img/wheel-minus.png);
+    background-size: contain;
+    z-index: 0;
+    cursor: pointer;
+}
+
 
 .button {
     background-image: url(/img/mach-btn/normal.png);
@@ -188,6 +207,7 @@ li.current-slide {
 
 .button:hover {
     background-image: url(/img/mach-btn/hover.png);
+    color: white;
 }
 
 .button:active {
@@ -307,8 +327,8 @@ img::selection {
 // ADAPTIVE syles
 
 .machine {
-    height: 85vh;
-    width: 128vh;
+    height: 84vh;
+    width: 126.1vh;
 }
 .machine__slider-container {
     height: 47%;
@@ -317,18 +337,13 @@ img::selection {
     left: 23%;
 }
 
-.machine__date {
-    height: 9.815%;
-    width: 8.425%;
-    top: 15.3%;
-    right: 15.2%;
-}
 .machine__slider-controls {
     bottom: 18%;
     left: -13%;
     width: 24.176%;
     height: 11.027%;
 }
+
 .machine__slider-controls { 
     li {
         height: 80%;
@@ -337,16 +352,228 @@ img::selection {
         height: 100%;
     }
 }
+
 li.machine__play-pause {
     height: 100%;
 }
+
 .machine__product-controls {
     width: 33.7%;
     height: 9.042%;
     left: -13%;
     bottom: 8%;
 }
+
 .machine__product-controls .button {
     height: 72%;
     width: 32%;
+    padding-top: 1%;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+.machine__zoom {
+    width: 17.175%;
+    img {
+        width: 100%;
+    }
+}
+
+.gallery-projector__projector {
+    height: 22vh;
+    width: 32.836vh;
+    background-size: cover;
+}
+.gallery-projector__light {
+    height: 40vh;
+}
+.nav-main {
+    width: 100vh;
+    height: 15vh;
+    box-sizing: border-box;
+}
+
+.nav-main {
+    width: 126vh;
+    top: -1.3vh;
+    height: 18.6vh;
+    position: relative;
+    box-sizing: border-box;
+    background: url(/img/header-bg.png);
+    background-size: cover;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8.5vh 13vh 2.5vh 23vh;
+    .button {
+        width: 15%;
+        height: 70%;
+        background-size: cover;
+        margin-top: -1%;
+        font-size: 0.9em;
+        padding-top: 0.3%;
+        box-sizing: border-box;
+    }
+}
+
+.machine__lamp-date {
+    width: 100px;
+    position: absolute;
+    right: 0;
+    bottom: 45%;
+    height: 16%;
+    width: 15%;
+    right: 8%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-between;
+    span {
+        height: 100%;
+        width: 25%;
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        background-size: cover;
+    }
+}
+
+.gallery-projector__slider {
+    width: 90vh;
+    height: 75vh;
+    bottom: 19.5vh;
+}
+.gallery-projector__controls {
+    position: absolute;
+    width: 74%;
+    height: 21%;
+    bottom: 5%; 
+    span {
+        height: 100%;
+        width: 20%;
+    }
+}
+
+
+
+/* ######################
+####       ABOUT    #####
+#######################*/
+
+.about {
+    position: relative;
+    height: 81.4vh;
+    width: 126vh;
+    margin: auto auto 0;
+    display: block;
+    overflow: hidden;
+}
+.about__main {
+    height: 100%;
+}
+.about__sheet {
+    height: 100%;
+    margin: auto;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.about__text {    
+        height: 89%;
+        width: 47%;
+        padding: 0 4% 5%;
+        box-sizing: border-box;
+        position: relative;
+        top: 11%;
+        left: 28%;
+        color: #343434;
+        overflow: scroll;
+    h1 {
+        font: 600 2.05em/1 "Playfair Display";
+        color: #41244C;
+        padding: 1.5em 0 0.6em;
+    }
+    p {
+        font: 400 0.76em/1.8em "Roboto";
+        padding-bottom: 1em;
+    }
+    h3 {
+        font: 600 1em/2em 'Playfair Display';
+        padding: 1.6em 0 0.3em;
+    }
+
+    li {
+        font: 400 .9em/1.5em 'Playfair Display';
+        span {
+            font-weight: 700;
+            padding: 0 1.5em 0 0;
+        }
+    }
+}
+
+.about__links {
+    position: absolute;
+    top: 18%;
+    right: 3%;
+    height: 64%;
+    width: 16%;
+    img {
+        height: 100%;
+    }
+}
+
+.about__film-link {
+    position: absolute;
+    color: #533714;
+    font: 700 1em/1.5em 'Playfair Display';
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    width: 55%;
+    height: 14%;
+    padding-top: 3%;
+    margin: 18% auto 0;
+}
+
+.about__fb-link {
+    height: 7%;
+    width: 61%;
+    position: absolute;
+    bottom: 12%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: rotate(11deg);
+}
+
+.contacts {
+    height: 81.4vh;
+    width: 126vh;
+    margin: 0 auto;
+    position: relative;
+}
+
+.contacts__main-img {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    // width: 100%;
+}
+
+#contacts__map {
+    width: 43.3vh;
+    height: 46.3vh;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 100%;
+    z-index: 0;
+    right: 10.9vh;
+    top: 1.5vh;
+    transform: rotate3d(36, 39, -36, 20deg);  
 }
