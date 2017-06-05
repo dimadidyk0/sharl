@@ -37,6 +37,7 @@ window.onload = function() {
     else console.log('Preloader not found')
 
     if (thisDoc.querySelector('.machine__slider')) {
+        getProducts()
         let machineSliderObj = {
             slider      : thisDoc.querySelector('.machine__slider'), 
             nextBtn     : thisDoc.querySelector('.machine__next'),
@@ -47,6 +48,18 @@ window.onload = function() {
         setListSlider(machineSliderObj, true, true);
     }
 
+    if (thisDoc.querySelector('.categories')) {
+        let categories = thisDoc.querySelectorAll('.category-item');
+        categories.forEach(c => {
+            let video = c.querySelector('video');
+            c.onmouseover = function() {
+                video.play();
+            }
+            c.onmouseout = function() {
+                video.pause();
+            }
+         });
+    }
 }
 
 // #########################
@@ -448,4 +461,6 @@ function buildProjectorSlider() {
 
     setListSlider(projectorSliderObj);
 }
+
+
 
