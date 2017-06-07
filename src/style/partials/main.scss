@@ -229,6 +229,7 @@ img::selection {
     left: 0;
     right: 0;
     margin: auto;
+    z-index: 10;
     height: 100%;
 }
 
@@ -243,24 +244,26 @@ img::selection {
 }
 
 .gallery-projector__light {
+    height: 544px;
+    width: 595px;
     position: absolute;
-    left: 0;
-    right: 0;
+    bottom: 5px;
     margin: auto;
-    bottom: 0;
+    left: -4px;
+    right: 0;
 }
 
-.gallery-projector__projector {
-    background-image: url(/img/projector/projector.png);
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 253px;
-    width: 378px;
-    margin: auto;
-    background-repeat: no-repeat;
-}
+// .gallery-projector__projector {
+//     background-image: url(/img/projector/projector.png);
+//     position: absolute;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     height: 253px;
+//     width: 378px;
+//     margin: auto;
+//     background-repeat: no-repeat;
+// }
 .gallery-projector__slider {
     position: absolute;
     width: 900px;
@@ -323,7 +326,9 @@ img::selection {
     left: 15%;
 }
 
-
+.gmnoprint {
+    display: none;
+}
 
 // ADAPTIVE syles
 
@@ -385,8 +390,85 @@ li.machine__play-pause {
     background-size: cover;
 }
 .gallery-projector__light {
-    height: 40vh;
+    // height: 40vh;
 }
+
+.gallery-projector__projector-sprite {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+    height: 544px;
+    width: 595px;
+    background: url(/img/sprite2.png);
+    // animation: projectorContent .5s  steps(1, end) infinite;
+    background-position-y: calc( -13 * 544px );
+}
+
+
+@keyframes projectorStart{
+    0% {
+        background-position-y: 0;
+    }
+    10% {
+        background-position-y: calc( -1 * 544px );
+    }
+    20% {
+        background-position-y: calc( -2 * 544px );
+
+    }
+    30% {
+        background-position-y: calc( -3 * 544px );
+
+    }
+    40% {
+        background-position-y: calc( -4 * 544px );
+
+    }
+    50% {
+        background-position-y: calc( -5 * 544px );
+
+    }
+    60% {
+        background-position-y: calc( -6 * 544px );
+
+    }
+    70% {
+        background-position-y: calc( -7 * 544px );
+
+    }
+    80% {
+        background-position-y: calc( -8 * 544px );
+
+    }
+    90% {
+        background-position-y: calc( -9 * 544px );
+
+    }
+    100% {
+        background-position-y: calc( -10 * 544px );
+
+    }
+}
+
+@keyframes projectorMain { 
+    0% {
+        background-position-y: calc( -14 * 544px );
+    }
+    25% {
+        background-position-y: calc( -13 * 544px );
+    }
+    50% {
+        background-position-y: calc( -12 * 544px );
+    }
+    75% {
+        background-position-y: calc( -11 * 544px );
+    }
+}
+
+
+
 .nav-main {
     width: 100vh;
     height: 15vh;
@@ -445,9 +527,10 @@ li.machine__play-pause {
 }
 .gallery-projector__controls {
     position: absolute;
-    width: 74%;
-    height: 21%;
-    bottom: 5%; 
+    width: 280px;
+    height: 55px;
+    bottom: 25px;
+    left: -17px;
     span {
         height: 100%;
         width: 20%;

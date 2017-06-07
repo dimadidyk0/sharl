@@ -1,4 +1,5 @@
 var thisDoc = document;
+var timeout;
 
 // #########################
 // ##      PRELOADER      ##
@@ -208,16 +209,20 @@ function setListSlider(obj, date, yearSlider) {
     nextBtn.onclick = function() {
         nextSlide();
         pauseSlideShow();
+        pauseProjector()
     };
 
     prevBtn.onclick = function() {
         prevSlide();
         pauseSlideShow();
+        pauseProjector();
     };
 
     playPause.onclick = function() {
         if (playing) pauseSlideShow();
         else playSlideShow();
+
+        if (playPause.className === "gallery-projector__play-pause") playPauseProjector();
     };
 
     var slideInterval = setInterval(function() {
@@ -253,6 +258,7 @@ function setListSlider(obj, date, yearSlider) {
         pauseSlideShow();
         showHideProjector();
         getProductVideo();
+        animateProjector();
     }
 
 
@@ -295,7 +301,7 @@ var json = JSON.stringify({
 
     "product-1" : {
         "year"  : "2000",
-        "images": ["/img/price-1.png","/img/price-2.png","/img/price-3.png","/img/price-4.png"], 
+        "images": ["http://lorempixel.com/400/425/","http://lorempixel.com/300/100/","http://lorempixel.com/350/350/","http://lorempixel.com/400/300/"], 
         "video" : "/img/video/header.mp4",
         "self"  : "product-1",
         "title" : "title-11"
@@ -303,7 +309,7 @@ var json = JSON.stringify({
 
     "product-2" : {
         "year"  : "2001",
-        "images": ["/img/price-2.png","/img/price-3.png","/img/price-4.png","/img/price-5.png"], 
+        "images": ["http://lorempixel.com/401/425/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
         "video" : "/img/video/header.mp4",
         "self"  : "product-2",
         "title" : "title-12"
@@ -311,7 +317,7 @@ var json = JSON.stringify({
 
     "product-3" : {
         "year"  : "2002",
-        "images": ["/img/price-3.png","/img/price-4.png","/img/price-5.png","/img/price-6.png"], 
+        "images": ["http://lorempixel.com/402/425/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
         "video" : "/img/video/header.mp4",
         "self"  : "product-3",
         "title" : 30
@@ -319,7 +325,7 @@ var json = JSON.stringify({
 
     "product-4" : {
         "year"  : "2003",
-        "images": ["/img/price-4.png","/img/price-5.png","/img/price-6.png","/img/price-7.png"], 
+        "images": ["http://lorempixel.com/403/425/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
         "video" : "/img/video/header.mp4",
         "self"  : "product-4",
         "title" : "title-14"
@@ -327,7 +333,7 @@ var json = JSON.stringify({
 
     "product-5" : {
         "year"  : "2003",
-        "images": ["/img/price-5.png","/img/price-6.png","/img/price-7.png","/img/price-8.png"], 
+        "images": ["http://lorempixel.com/404/425/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
         "video" : "/img/video/header.mp4",
         "self"  : "product-4",
         "title" : "title-14"
@@ -335,7 +341,7 @@ var json = JSON.stringify({
 
     "product-6" : {
         "year"  : "2003",
-        "images": ["/img/price-6.png","/img/price-7.png","/img/price-8.png","/img/price-9.png"], 
+        "images": ["http://lorempixel.com/405/425/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
         "video" : "/img/video/header.mp4",
         "self"  : "product-4",
         "title" : "title-14"
@@ -399,12 +405,13 @@ function showHideProjector() {
         projector   = thisDoc.querySelector('.gallery-projector'),
         back        = projector.querySelector('.gallery-projector__back');
 
-    machine.style.bottom = '-100%';
     projector.style.bottom = '0';
 
     back.onclick = function() {
-        machine.removeAttribute('style');
         projector.removeAttribute('style');   
+        projector.removeAttribute('data-condition');   
+        clearTimeout(timeout);
+        pauseProjector();
     }
 }
 
@@ -435,7 +442,7 @@ function getProductVideo() {
         slider      = thisDoc.querySelector('.gallery-projector__slider'),
         urn         = thisDoc.querySelector('.current-slide').getAttribute('data-key'),
         product     = JSON.parse(localStorage.getItem(urn));
-        videoSrc       = product.video;
+        videoSrc    = product.video;
 
     slider.innerHTML = '';
     let 
@@ -459,8 +466,41 @@ function buildProjectorSlider() {
         playPause   : thisDoc.querySelector('.gallery-projector__play-pause')
     }
 
+    animateProjector();
+
     setListSlider(projectorSliderObj);
 }
+function animateProjector( ) {
+    let projector = thisDoc.querySelector('.gallery-projector__projector-sprite'),
+        animation = 'animation: projectorStart .6s  steps(1, end) infinite;';
+    projector.setAttribute('style', 'display:none;')
 
+    timeout = setTimeout(function() {
+        projector.setAttribute('style', animation);
+        setTimeout(function(){
+            playProjector();
+        }, 600)
+    },500)
 
+}   
 
+function playPauseProjector() {
+    let projector = thisDoc.querySelector('.gallery-projector__projector-sprite'),
+        condition = projector.getAttribute('data-condition');
+
+    if (condition === 'play') pauseProjector();
+    else playProjector();
+    
+}
+
+function playProjector() {
+    let projector = thisDoc.querySelector('.gallery-projector__projector-sprite');
+    projector.setAttribute('style', 'animation: projectorMain .5s  steps(1, end) infinite;');
+    projector.setAttribute('data-condition', 'play');
+}
+
+function pauseProjector() {
+    let projector = thisDoc.querySelector('.gallery-projector__projector-sprite');  
+    projector.setAttribute('style', '');
+    projector.setAttribute('data-condition', 'pause');
+}

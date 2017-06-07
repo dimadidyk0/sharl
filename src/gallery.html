@@ -11,7 +11,7 @@
 
 <body>
     <div class="gallery">
-        <div>
+        <!--<div>
             <img src="img/pics-001.jpg" alt="">
             <div>some text</div>
         </div>
@@ -19,10 +19,6 @@
             <img src="img/pics-002.jpg" alt="">
             <div>some text</div>
         </div>
-        <!--<div>
-            <img src="img/pics-003.jpg" alt="">
-            <div>some text</div>
-        </div>-->
         <div>
             <img src="img/pics-004.jpg" alt="">
             <div>some text</div>
@@ -63,7 +59,70 @@
             <img src="img/pics-013.jpg" alt="">
             <div>some text</div>
         </div>
+    </div>-->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <div class="video-container">
+        <div id="video-placeholder"></div>
+        <div class="video-hover"></div>
     </div>
+
+    <style>
+        .video-container  {
+            position: relative;
+            height: 400px;
+            width: 600px;
+        }
+        .video-hover {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 2;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+        }
+    
+    </style>
+
+    <script>
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('video-placeholder', {
+        width: 600,
+        height: 400,
+        videoId: 'Xa0Q0J5tOP0',
+
+        playerVars: {
+            controls        : 0,
+            autoplay        : 1,
+            fs              : 0,
+            loop            : 1,
+            rel             : 0,
+            disablekb       : 0,
+            enablejsapi     : 0,
+            iv_load_policy  : 3,
+            modestbranding  : 1,
+            showinfo        : 0
+        },
+        events: {
+            onReady: initialize
+        }
+        });
+    }
+
+    let video  = document.querySelector('#video-placeholder');
+    console.log(video);
+    function initialize(){
+        // Обновляем элементы управления и загружаем
+        // Сброс старого интервала
+        clearInterval(time_update_interval);
+        // Запускаем обновление таймера и дорожки проигрывания
+        // каждую секунду.
+        time_update_interval = setInterval(function () {
+        }, 1000)
+    }
+    </script>
+     <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/9JtIObId5Os?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen autoplay=''></iframe>-->
 
     <script src='js/main.js'></script>
 </body>

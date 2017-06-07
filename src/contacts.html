@@ -13,8 +13,15 @@
             var mapProp= {
                 center: new google.maps.LatLng(51.508742,-0.120850),
                 // marker : new google.maps.Marker({position: this.center}),
-                mapTypeId: 'satellite',
-                zoom: a || 15,
+                mapTypeId           : 'satellite',
+                zoom                : a || 15,
+                panControl          : false,
+                zoomControl         : false,
+                mapTypeControl      : false,
+                scaleControl        : false,
+                streetViewControl   : false,
+                overviewMapControl  : false,
+                rotateControl       : false
             };
 
 
