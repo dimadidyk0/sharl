@@ -180,3 +180,30 @@ input:-webkit-autofill {
 /* /reset */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+
+input::-webkit-input-placeholder {
+    color: #999;
+}
+input:-moz-placeholder {
+    color: #999;
+}
+input::-moz-placeholder {
+    color: #999;
+}
+input:-ms-input-placeholder {
+    color: #999;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+input:focus:-moz-placeholder {
+    color: transparent;
+}
+input:focus::-moz-placeholder {
+    color: transparent;
+}
+input:focus:-ms-input-placeholder {
+    color: transparent;
+}

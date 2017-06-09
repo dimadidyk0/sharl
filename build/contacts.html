@@ -37,12 +37,14 @@
         <img src="/img/gif/loading.gif" alt=""> 
     </div>
     
+    <!--<img src="/img/gif/butterfly.gif" alt="">-->
     <div id="layout"></div>
     <header>
         <nav class="nav-main">  
             <img src="/img/gif/alarm.gif" alt="" class="header__alarm">
             <img src="/img/gif/header-coin.gif" alt="" class="heaer__coin">
             <img src="/img/gif/header-cube.gif" alt="" class="header__cube">
+            <img src="/img/cactus.png" alt="" class="header__cactus">
             <a class='button' href="/sculptor.html">Sculptor</a>
             <a class='button' href="/machine.html">Gallery</a>
             <a class='button' href="/categories.html">Shop</a>
@@ -53,53 +55,30 @@
     </header>
 
     <div class="contacts">
-        <img src="/img/contacts@1x.png" srcset='"/img/contacts@2x.png 2x' alt="MOrgan contacts background" class="contacts__main-img">
-
+        <img src="/img/Contact@1x.png" srcset='"/img/Contact@2x.png 2x' alt="MOrgan contacts background" class="contacts__main-img">
+        <div class="contacts__text">
+            <h2>WORKSHOP</h2>
+            <p>Route de Châtel St Denis 65 </p>
+            <p> 1805 JONGNY SWITZERLAND</p>
+        </div>
         <div id="contacts__map"></div>
         <a href="" class="map-btn map-plus"></a>
         <a href="" class="map-btn map-minus"></a>
+
+        <div class="contacts__number">+41 79 651 2647</div>
+
+        <div class="contacts__socials">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+        </div>
     </div>
     <script>
-        function myMap() {
-            var a = +localStorage.getItem('zoom');
-            var mapProp= {
-                center: new google.maps.LatLng(51.508742,-0.120850),
-                // marker : new google.maps.Marker({position: this.center}),
-                mapTypeId           : 'satellite',
-                zoom                : a || 15,
-                panControl          : false,
-                zoomControl         : false,
-                mapTypeControl      : false,
-                scaleControl        : false,
-                streetViewControl   : false,
-                overviewMapControl  : false,
-                rotateControl       : false
-            };
-
-
-            let minus = document.querySelector('.map-minus');
-            let plus = document.querySelector('.map-plus');
-
-            plus.onclick = function(e) {
-                e.preventDefault();
-                let a  = mapProp.zoom + 1;
-                localStorage.setItem('zoom', a);
-                myMap();
-            }
-
-            minus.onclick = function(e) {
-                e.preventDefault();
-                let a  = mapProp.zoom - 1;
-                localStorage.setItem('zoom', a);
-                myMap();
-            }
-            
-            var map = new google.maps.Map(document.getElementById("contacts__map"),mapProp);
-            var marker = new google.maps.Marker({position:mapProp.center});
-            marker.setMap(map);
-        }
+        
     </script>
 	<script src="js/main.js"></script>		
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjkLgSteJt6s_PtHPcfi4jf44Gf4ZDZ8Q&callback=myMap"></script>
 </body>
 </html>

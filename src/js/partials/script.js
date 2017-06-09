@@ -69,6 +69,21 @@ window.onload = function() {
 
 thisDoc.addEventListener("DOMContentLoaded", function() {
 
+    let cactus = thisDoc.querySelector('.header__cactus');
+    if (localStorage.getItem('cactus')) cactus.remove();
+    else {
+        cactus.onclick = function() {
+            cactus.setAttribute('src', '/img/gif/cactus.gif');
+            cactus.classList.add('cactus-animation');
+            setTimeout(function(){
+                cactus.remove();
+            },13000);
+            localStorage.setItem('cactus', true);
+            let pressedAnimationCount = localStorage.getItem('pressed');
+            scorePressed();
+        }
+    }
+
     let productForm = thisDoc.querySelector('#order-pop-up form');
 
     if (productForm) {
@@ -175,14 +190,32 @@ function setListSlider(obj, date, yearSlider) {
         slides[current].classList.remove('current-slide');
         current = (current + slides.length + 1) % slides.length;
         slides[current].classList.add('current-slide');
-        if (date) changeProductDate();
+        if (date) {
+            changeProductDate();
+            whiteNoise();
+        }
     };
 
     function prevSlide() {
         slides[current].classList.remove('current-slide');
         current = (current + slides.length - 1) % slides.length;
         slides[current].classList.add('current-slide');
-        if (date) changeProductDate();
+        if (date) {
+            changeProductDate();
+            whiteNoise();
+        }
+    };
+
+    function whiteNoise() {
+        let noise   = thisDoc.querySelector('.machine__noise'),
+            machine = thisDoc.querySelector('.machine');
+
+        machine.classList.add('machine--shake');
+        noise.style.display = 'block';
+        setTimeout(function() {
+            noise.removeAttribute('style');
+            machine.classList.remove('machine--shake');
+        }, 1000);
     };
 
     function changeProductDate() {
@@ -227,7 +260,7 @@ function setListSlider(obj, date, yearSlider) {
 
     var slideInterval = setInterval(function() {
         nextSlide();
-    }, 3000);
+    }, 4000);
 
     function pauseSlideShow() {
         playing = false;
@@ -238,7 +271,7 @@ function setListSlider(obj, date, yearSlider) {
         playing = true;
         slideInterval = setInterval(function() {
             nextSlide();
-        }, 3000);
+        }, 4000);
     };
 
 
@@ -300,61 +333,119 @@ function setListSlider(obj, date, yearSlider) {
 var json = JSON.stringify({
 
     "product-1" : {
-        "year"  : "2000",
-        "images": ["http://lorempixel.com/400/425/","http://lorempixel.com/300/100/","http://lorempixel.com/350/350/","http://lorempixel.com/400/300/"], 
-        "video" : "/img/video/header.mp4",
-        "self"  : "product-1",
-        "title" : "title-11"
+        "year"      : "2000",
+        "images"    : ["http://lorempixel.com/400/425/",
+                       "http://lorempixel.com/300/100/",
+                       "http://lorempixel.com/350/350/",
+                       "http://lorempixel.com/400/300/"], 
+        "video"     : "/img/video/header",
+        "self"      : "product-1",
+        "title"     : "title-1",
+        "link"      : "/product.html",
+        "size"      : "small",
+        "category"  : "category 1"
     },
 
-    "product-2" : {
-        "year"  : "2001",
-        "images": ["http://lorempixel.com/401/425/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
-        "video" : "/img/video/header.mp4",
-        "self"  : "product-2",
-        "title" : "title-12"
+    "product-2"     : {
+        "year"      : "2000",
+        "images"    : ["http://lorempixel.com/401/425/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
+        "video"     : "/img/video/header.mp4",
+        "self"      : "product-2",
+        "title"     : "title-2",
+        "link"      : "/product.html",
+        "size"      : "small",
+        "category"  : "category 1"
     },
 
-    "product-3" : {
-        "year"  : "2002",
-        "images": ["http://lorempixel.com/402/425/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
-        "video" : "/img/video/header.mp4",
-        "self"  : "product-3",
-        "title" : 30
+    "product-3"     : {
+        "year"      : "2002",
+        "images"    : ["http://lorempixel.com/402/425/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
+        "video"     : "/img/video/header.mp4",
+        "self"      : "product-3",
+        "title"     : 'title 011',
+        "link"      : "/product.html",
+        "size"      : "small",
+        "category"  : "category 1"
     },
 
-    "product-4" : {
-        "year"  : "2003",
-        "images": ["http://lorempixel.com/403/425/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
-        "video" : "/img/video/header.mp4",
-        "self"  : "product-4",
-        "title" : "title-14"
+    "product-4"     : {
+        "year"      : "2003",
+        "images"    : ["http://lorempixel.com/403/425/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
+        "video"     : "/img/video/header.mp4",
+        "self"      : "product-4",
+        "title"     : "title-14",
+        "link"      : "/product.html",
+        "size"      : "small",
+        "category"  : "category 1"
     },
 
-    "product-5" : {
-        "year"  : "2003",
-        "images": ["http://lorempixel.com/404/425/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
-        "video" : "/img/video/header.mp4",
-        "self"  : "product-4",
-        "title" : "title-14"
+    "product-5"     : {
+        "year"      : "2003",
+        "images"    : ["http://lorempixel.com/404/425/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
+        "video"     : "/img/video/header.mp4",
+        "self"      : "product-5",
+        "title"     : "title-14",
+        "link"      : "/product.html",
+        "size"      : "small",
+        "category"  : "category 1"
     },
 
-    "product-6" : {
-        "year"  : "2003",
-        "images": ["http://lorempixel.com/405/425/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-        "video" : "/img/video/header.mp4",
-        "self"  : "product-4",
-        "title" : "title-14"
+    "product-6"     : {
+        "year"      : "2003",
+        "images"    : ["http://lorempixel.com/405/425/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+        "video"     : "/img/video/header.mp4",
+        "self"      : "product-6",
+        "title"     : "title-14",
+        "link"      : "/product.html",
+        "size"      : "large",
+        "category"  : "category 2"
     }
 });
 
+
+function createLinks() {
+    var 
+        parsedJSON  = JSON.parse(json),
+        keys        = Object.keys(parsedJSON),
+
+        yearLinks      = {},
+        sizeLinks      = {},
+        categoryLinks  = {};
+        
+
+    keys.forEach(i => {
+        let obj = parsedJSON[i];
+
+        if (yearLinks[obj.year]) yearLinks[obj.year].push(obj.self);
+        else yearLinks[obj.year] = [obj.self];
+        
+        if (sizeLinks[obj.size]) sizeLinks[obj.size].push(obj.self);
+        else sizeLinks[obj.size] = [obj.self];
+        
+        if (categoryLinks[obj.category]) categoryLinks[obj.category].push(obj.self);
+        else categoryLinks[obj.category] = [obj.self];
+
+    });
+
+    localStorage.setItem("yearLinks",     JSON.stringify(yearLinks));
+    localStorage.setItem("sizeLinks",     JSON.stringify(sizeLinks));
+    localStorage.setItem("categoryLinks", JSON.stringify(categoryLinks));
+
+
+}
+
+createLinks();
 
 function getProducts() {
 
     var 
         parsedJSON  = JSON.parse(json),
         keys        = Object.keys(parsedJSON),
-        years       = {};
+        years       = {},
+
+        yearLinks      = [],
+        sizeLinks      = [],
+        categoryLinks  = [];
 
     keys.forEach(k => {
         let obj = parsedJSON[k];
@@ -378,7 +469,8 @@ function getProducts() {
     });
 
     localStorage.setItem('years', Object.keys(years));
-
+        
+    
 }
 function getNextSlide(sign, year) {
     var 
@@ -503,4 +595,132 @@ function pauseProjector() {
     let projector = thisDoc.querySelector('.gallery-projector__projector-sprite');  
     projector.setAttribute('style', '');
     projector.setAttribute('data-condition', 'pause');
+}
+
+function myMap() {
+    var a = +localStorage.getItem('zoom');
+    var mapProp= {
+        center: new google.maps.LatLng(46.461275,6.845362),
+        mapTypeId           : 'satellite',
+        zoom                : a || 15,
+        panControl          : false,
+        zoomControl         : false,
+        mapTypeControl      : false,
+        scaleControl        : false,
+        streetViewControl   : false,
+        overviewMapControl  : false,
+        rotateControl       : false
+    };
+
+
+    let minus = document.querySelector('.map-minus');
+    let plus = document.querySelector('.map-plus');
+
+    plus.onclick = function(e) {
+        e.preventDefault();
+        let a  = mapProp.zoom + 1;
+        localStorage.setItem('zoom', a);
+        myMap();
+    }
+
+    minus.onclick = function(e) {
+        e.preventDefault();
+        let a  = mapProp.zoom - 1;
+        localStorage.setItem('zoom', a);
+        myMap();
+    }
+    
+    var map = new google.maps.Map(document.getElementById("contacts__map"),mapProp);
+    var marker = new google.maps.Marker({position:mapProp.center});
+    marker.setMap(map);
+}
+
+function scorePressed() {
+    let pressedAnimationCount = localStorage.getItem('pressed');
+    if (pressedAnimationCount) {
+        localStorage.setItem('pressed', ++pressedAnimationCount);
+    }
+    else {
+        localStorage.setItem('pressed', 1);
+    }
+}
+
+
+
+
+if (thisDoc.querySelector('.gallery__filter')) filterGellery()
+
+function filterGellery() {
+    let filter     = thisDoc.querySelector('.gallery__filter'),
+        submit     = filter.querySelector('input[type=submit]'),
+        categories = JSON.parse(localStorage.getItem('categoryLinks')),
+        years      = JSON.parse(localStorage.getItem('yearLinks')),
+        sizes      = JSON.parse(localStorage.getItem('sizeLinks')),
+        result;
+
+
+
+
+    submit.onclick = function(e) {
+        let 
+            filters     = getFilters(filter),
+            yearArr     = findInObj(filters.year, years),
+            categoryArr = findInObj(filters.category, categories),
+            sizesArr    = findInObj(filters.size, sizes);
+
+        e.preventDefault();
+        console.log(filterProducts(sizesArr, yearArr, categoryArr))
+    }
+
+
+    
+
+    function filterProducts() {
+
+        var prevList = currentList = result = [];
+
+        Array.from(arguments).forEach( (current, j)  => {
+
+            result = [];
+            // console.log(j, current);
+            if (prevList.length > 0) {
+
+                prevList.forEach( i => {
+                        // console.log(i);
+                        // console.log(current);
+                        // console.log(current.indexOf(i));
+                    
+                    if (current.indexOf(i) != -1) {
+                        result.push(i);
+                    }
+                })
+                prevList = result;
+
+            } else if (j == 0){
+                prevList = current;
+            } 
+
+            if (j === arguments.length - 1) {
+                return prevList;
+            }
+        })
+        
+
+        return prevList;
+    }
+            
+}
+
+function getFilters(filter)  {
+    let obj =  {
+        year     : filter.querySelector('#filter-year').value,
+        category : filter.querySelector('#filter-category').value,
+        size     : filter.querySelector('#filter-size').value
+    }
+    return obj;
+}
+
+function findInObj(value, obj) {
+    if (obj[value]) return obj[value];
+    else return [];
 }

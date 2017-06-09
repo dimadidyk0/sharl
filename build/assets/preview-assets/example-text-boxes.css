@@ -1,0 +1,13 @@
+
+.gridzy > .wordBox, /* to catch before initialization */
+.gridzyItem > .wordBox { /* to catch after initialization */
+	padding: 0.25em;
+	line-height: 1em;
+	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+	box-sizing: border-box;
+	font-size: 10em;
+	color: #224157;
+	background: #DCD3AA;
+}

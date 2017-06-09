@@ -26,3 +26,83 @@
     width: 16vh;
     top: 20%;
 }
+
+.header__cactus {
+    position: absolute;
+    top: -26px;
+    left: 35px;
+    z-index: 12;
+    cursor: pointer;
+}
+
+.cactus-animation {
+    animation: cactusAnimation 13s linear;
+    cursor: initial;
+}
+
+@keyframes cactusAnimation {
+    0% {
+        top: -26px;
+        left: 35px;
+    }
+    // 1% {
+    //     top: 8px;
+    // }
+    // 2% {
+    //     top: 17px;
+    // }
+    // 3% {
+    //     top: 28px;
+    // }
+    // 4% {
+    //     top: 40px;
+    // }
+    // 5% {
+    //     top: 55px;
+    // }
+    // 6% {
+    //     top: 80px;
+    // }
+    // 7% {
+    //     top: 100px;
+    // }
+    // 8% {
+    //     top: 130px;
+    // }
+    // 9% {
+    //     top: 180px;
+    // }
+    // 10% {
+    //     top: 250px;
+    // }
+    // 12% {
+    //     top: 350px;
+    // }
+    15% {
+        top: 500px;
+    }
+    20% {
+        top: 550px;
+        left: 35px;
+    }
+    25% {
+        top: 540px;
+    }
+    30% {
+        top: 530px;
+    }
+    35% {
+        top: 515px;
+    }
+    40% {
+        top: 500px;
+    }
+    99%{
+        opacity: 1;
+    }
+    100% {
+        top: 12px;
+        left: 1140px;
+        opacity: 0;
+    }
+}
