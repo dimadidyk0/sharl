@@ -99,7 +99,7 @@
     </div>
 
     <div class="gridzy gridzyClassic gridzyAnimated">
-        <div>
+        <!--<div>
             <img src="img/pics-001.jpg" alt="">
             <div>
                 <h5>Lampe, 2008</h5>
@@ -292,45 +292,97 @@
                     <source src="/img/video/header.ogv" type="video/ogg">
                 </video>
             </div>
-        </div>
+        </div>-->
     </div>
 
 <script>
-	new Gridzy(document.querySelector('.gridzy'));
+    function buildSlider() {
+        let container = document.querySelector('.gridzy');
+        // let a = '_' + ((Math.random() * 1e10)^0);
+        // container.id = a;
+        
+        // new Gridzy(document.querySelector(`#${a}`));
+        new Gridzy(document.querySelector('.gridzy'));
+        setTimeout(function() {
+
+            let galleryList = Array.from(document.querySelectorAll('.gridzyItemContent'));
+            galleryList.forEach(b => {
+                let video = b.querySelector('video');
+
+                b.onmouseover = function() {
+                    video.play();
+                }
+
+                b.onmouseout = function() {
+                    video.pause();
+                }
+
+                let 
+                    title         = b.querySelector('h3'),
+                    blockW        = b.clientWidth,
+                    blockH        = b.clientHeight,
+                    textContainer = b.querySelector('div');
 
 
-    setTimeout(function() {
-        let galleryList = Array.from(document.querySelectorAll('.gridzyItemContent'));
-        galleryList.forEach(b => {
-            let video = b.querySelector('video');
+                if (blockH > blockW) {
+                    textContainer.style.alignItems  = 'flex-start';
+                    title.style.fontSize = (blockW * 0.12) + 'px';
+                    title.style.lineHeight = (blockW * .14) + 'px';
+                } else {
+                    title.style.fontSize = (blockW * 0.08) + 'px';
+                    title.style.lineHeight = (blockW * .11) + 'px';
+                }
 
-            b.onmouseover = function() {
-                video.play();
-            }
-
-            b.onmouseout = function() {
-                video.pause();
-            }
-
-            let 
-                title         = b.querySelector('h3'),
-                blockW        = b.clientWidth,
-                blockH        = b.clientHeight,
-                textContainer = b.querySelector('div');
+            });
+        }, 1500);
+    }
 
 
-            if (blockH > blockW) {
-                textContainer.style.alignItems  = 'flex-start';
-                title.style.fontSize = (blockW * 0.12) + 'px';
-                title.style.lineHeight = (blockW * .14) + 'px';
-            } else {
-                title.style.fontSize = (blockW * 0.08) + 'px';
-                title.style.lineHeight = (blockW * .11) + 'px';
-            }
+    function buildGallery() {
+        let 
+            thisDoc   = document,
+            container = thisDoc.querySelector('.gridzy'),
+            prevElem = container.nextElementSibling,
+            clone     = container.cloneNode(false);
+            products  = localStorage.getItem('currentProducts').split(',');
+        
 
+        container.remove();
+        document.querySelector('body').insertBefore(clone, prevElem);
+
+        container = thisDoc.querySelector('.gridzy');
+        
+        products.forEach(product => {
+            let obj = JSON.parse(localStorage.getItem(product));
+            let div = thisDoc.createElement('div');
+            
+            console.log(obj);
+            let markup = 
+                `
+                <img src="${obj.images[0]}" alt="${obj.title}">
+                <div>
+                    <h5>${obj.category}, ${obj.year}</h5>
+                    <h3>${obj.title}</h3>
+                    <span>$${obj.price}</span>
+                    <a href="${obj.link}"></a>
+                </div>
+                <div class="gridzy__video-container">
+                    <video muted class="category-item__video">
+                        <source src="${obj.video}.webm" type="video/webm">
+                        <source src="${obj.video}.mp4" type="video/mp4">
+                        <source src="${obj.video}.ogv" type="video/ogg">
+                    </video>
+                </div>
+                `;
+                
+            div.innerHTML = markup;
+            container.appendChild(div);
         });
-    }, 1500);
-
+        console.log(container);
+    }
+    // buildGallery();
+   
+    
 </script>
 
 

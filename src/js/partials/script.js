@@ -334,7 +334,7 @@ var json = JSON.stringify({
 
     "product-1" : {
         "year"      : "2000",
-        "images"    : ["http://lorempixel.com/400/425/",
+        "images"    : ["http://lorempixel.com/400/400/",
                        "http://lorempixel.com/300/100/",
                        "http://lorempixel.com/350/350/",
                        "http://lorempixel.com/400/300/"], 
@@ -343,62 +343,128 @@ var json = JSON.stringify({
         "title"     : "title-1",
         "link"      : "/product.html",
         "size"      : "small",
-        "category"  : "category 1"
+        "category"  : "category 1",
+        "price"     : "1999"
     },
 
     "product-2"     : {
         "year"      : "2000",
-        "images"    : ["http://lorempixel.com/401/425/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
-        "video"     : "/img/video/header.mp4",
+        "images"    : ["http://lorempixel.com/401/400/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
+        "video"     : "/img/video/header",
         "self"      : "product-2",
         "title"     : "title-2",
         "link"      : "/product.html",
         "size"      : "small",
-        "category"  : "category 1"
+        "category"  : "category 1",
+        "price"     : "6999"
     },
 
     "product-3"     : {
         "year"      : "2002",
-        "images"    : ["http://lorempixel.com/402/425/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
-        "video"     : "/img/video/header.mp4",
+        "images"    : ["http://lorempixel.com/402/400/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
+        "video"     : "/img/video/header",
         "self"      : "product-3",
         "title"     : 'title 011',
         "link"      : "/product.html",
         "size"      : "small",
-        "category"  : "category 1"
+        "category"  : "category 1",
+        "price"     : "5999"
     },
 
     "product-4"     : {
         "year"      : "2003",
-        "images"    : ["http://lorempixel.com/403/425/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
-        "video"     : "/img/video/header.mp4",
+        "images"    : ["http://lorempixel.com/403/400/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
+        "video"     : "/img/video/header",
         "self"      : "product-4",
         "title"     : "title-14",
         "link"      : "/product.html",
         "size"      : "small",
-        "category"  : "category 1"
+        "category"  : "category 1",
+        "price"     : "4999"
     },
 
     "product-5"     : {
         "year"      : "2003",
-        "images"    : ["http://lorempixel.com/404/425/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
-        "video"     : "/img/video/header.mp4",
+        "images"    : ["http://lorempixel.com/404/400/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
+        "video"     : "/img/video/header",
         "self"      : "product-5",
         "title"     : "title-14",
         "link"      : "/product.html",
         "size"      : "small",
-        "category"  : "category 1"
+        "category"  : "category 1",
+        "price"     : "2999"
     },
 
     "product-6"     : {
         "year"      : "2003",
-        "images"    : ["http://lorempixel.com/405/425/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-        "video"     : "/img/video/header.mp4",
+        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+        "video"     : "/img/video/header",
         "self"      : "product-6",
         "title"     : "title-14",
         "link"      : "/product.html",
         "size"      : "large",
-        "category"  : "category 2"
+        "category"  : "category 2",
+        "price"     : "3999"
+    },
+
+    "product-7"     : {
+        "year"      : "2003",
+        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+        "video"     : "/img/video/header",
+        "self"      : "product-7",
+        "title"     : "title-14",
+        "link"      : "/product.html",
+        "size"      : "large",
+        "category"  : "category 2",
+        "price"     : "3999"
+    },
+
+    "product-8"     : {
+        "year"      : "2003",
+        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+        "video"     : "/img/video/header",
+        "self"      : "product-8",
+        "title"     : "title-14",
+        "link"      : "/product.html",
+        "size"      : "large",
+        "category"  : "category 8",
+        "price"     : "3999"
+    },
+
+    "product-9"     : {
+        "year"      : "2003",
+        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+        "video"     : "/img/video/header",
+        "self"      : "product-9",
+        "title"     : "title-14",
+        "link"      : "/product.html",
+        "size"      : "large",
+        "category"  : "category 9",
+        "price"     : "3999"
+    },
+
+    "product-10"     : {
+        "year"      : "2003",
+        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+        "video"     : "/img/video/header",
+        "self"      : "product-10",
+        "title"     : "title-14",
+        "link"      : "/product.html",
+        "size"      : "large",
+        "category"  : "category 2",
+        "price"     : "3999"
+    },
+
+    "product-11"     : {
+        "year"      : "2003",
+        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+        "video"     : "/img/video/header",
+        "self"      : "product-11",
+        "title"     : "title-14",
+        "link"      : "/product.html",
+        "size"      : "large",
+        "category"  : "category 2",
+        "price"     : "3999"
     }
 });
 
@@ -430,7 +496,7 @@ function createLinks() {
     localStorage.setItem("yearLinks",     JSON.stringify(yearLinks));
     localStorage.setItem("sizeLinks",     JSON.stringify(sizeLinks));
     localStorage.setItem("categoryLinks", JSON.stringify(categoryLinks));
-
+    localStorage.setItem('allProducts', keys);
 
 }
 
@@ -659,17 +725,46 @@ function filterGellery() {
         result;
 
 
+        let selects = Array.from(filter.querySelectorAll('select'));
 
+    selects.forEach(s => {
+        
+
+        s.onchange = function() {
+            let 
+                filters     = getFilters(filter),
+                yearArr     = findInObj(filters.year, years),
+                categoryArr = findInObj(filters.category, categories),
+                sizesArr    = findInObj(filters.size, sizes);
+
+            let products; 
+
+            if ( yearArr === 'all' && categoryArr === 'all' && sizesArr === 'all' ) {
+                products = localStorage.getItem('allProducts');
+            } else {
+                products = filterProducts(sizesArr, yearArr, categoryArr);
+                
+            }
+            localStorage.setItem('currentProducts', products);
+            buildGallery();
+            setTimeout(function() {
+                buildSlider();
+            }, 50);
+        }
+    });
 
     submit.onclick = function(e) {
-        let 
-            filters     = getFilters(filter),
-            yearArr     = findInObj(filters.year, years),
-            categoryArr = findInObj(filters.category, categories),
-            sizesArr    = findInObj(filters.size, sizes);
-
         e.preventDefault();
-        console.log(filterProducts(sizesArr, yearArr, categoryArr))
+        let inputInner = filter.querySelector('input[type=text]').value;
+
+        let products = [inputInner];
+
+        localStorage.setItem('currentProducts', products);
+        buildGallery();
+        setTimeout(function() {
+            buildSlider();
+        }, 50);
+        
     }
 
 
@@ -677,35 +772,27 @@ function filterGellery() {
 
     function filterProducts() {
 
-        var prevList = currentList = result = [];
+        var prevList = result = [];
 
-        Array.from(arguments).forEach( (current, j)  => {
+        Array.from(arguments).forEach( (current, i)  => {
 
             result = [];
-            // console.log(j, current);
-            if (prevList.length > 0) {
 
-                prevList.forEach( i => {
-                        // console.log(i);
-                        // console.log(current);
-                        // console.log(current.indexOf(i));
-                    
-                    if (current.indexOf(i) != -1) {
-                        result.push(i);
+
+            if (prevList.length > 0 && current !== 'all' && prevList !== 'all') {
+
+                prevList.forEach( j => {
+                    if (current.indexOf(j) != -1) {
+                        result.push(j);
                     }
                 })
+
                 prevList = result;
 
-            } else if (j == 0){
-                prevList = current;
-            } 
-
-            if (j === arguments.length - 1) {
-                return prevList;
-            }
-        })
+            } else if (i == 0 || prevList === 'all') prevList = current;
+            
+        });
         
-
         return prevList;
     }
             
@@ -721,6 +808,7 @@ function getFilters(filter)  {
 }
 
 function findInObj(value, obj) {
-    if (obj[value]) return obj[value];
-    else return [];
+    if (value == 'all')  return 'all'
+    else if (obj[value]) return obj[value];
+    else                 return [];
 }
