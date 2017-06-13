@@ -64,27 +64,18 @@
             <li>
                 <select name="" id="filter-category">
                     <option value="all">All categories</option>
-                    <option value="category 1" selected>category 1</option>
-                    <option value="category 2">category 2</option>
                 </select>
             </li>
 
             <li>
                 <select name="" id="filter-year">
                     <option value="all">Creation year</option>
-                    <option value="2000" selected>2000</option>
-                    <option value="2001">2001</option>
-                    <option value="2002">2002</option>
-                    <option value="2003">2003</option>
-                    <option value="2004">2004</option>
                 </select>
             </li>
 
             <li>
                 <select name="" id="filter-size">
                     <option value="all">Size</option>
-                    <option value="small" selected>Small</option>
-                    <option value="large">Large</option>
                 </select>
             </li>
 
@@ -97,7 +88,9 @@
             <span class="gallery__filter-nut"></span>
         </ul>
     </div>
-
+    <div class="gallery__not-found">
+        Not found
+    </div>
     <div class="gridzy gridzyClassic gridzyAnimated">
         <!--<div>
             <img src="img/pics-001.jpg" alt="">
@@ -294,28 +287,27 @@
             </div>
         </div>-->
     </div>
-
 <script>
     function buildSlider() {
         let container = document.querySelector('.gridzy');
-        // let a = '_' + ((Math.random() * 1e10)^0);
-        // container.id = a;
-        
-        // new Gridzy(document.querySelector(`#${a}`));
-        new Gridzy(document.querySelector('.gridzy'));
+        let elements  = Array.from(container.children);
+
+        if (elements.length > 2 ) {
+            new Gridzy(document.querySelector('.gridzy'));
+        } else {
+            elements.forEach(e => {
+                e.className = 'gridzyItemContent gridzyItem gridzyItem--another'
+            })
+        }
+
         setTimeout(function() {
 
             let galleryList = Array.from(document.querySelectorAll('.gridzyItemContent'));
             galleryList.forEach(b => {
+
                 let video = b.querySelector('video');
-
-                b.onmouseover = function() {
-                    video.play();
-                }
-
-                b.onmouseout = function() {
-                    video.pause();
-                }
+                b.onmouseover = function() {video.play();}
+                b.onmouseout  = function() {video.pause();}
 
                 let 
                     title         = b.querySelector('h3'),
@@ -334,7 +326,7 @@
                 }
 
             });
-        }, 1500);
+        }, 500);
     }
 
 
@@ -342,45 +334,99 @@
         let 
             thisDoc   = document,
             container = thisDoc.querySelector('.gridzy'),
-            prevElem = container.nextElementSibling,
-            clone     = container.cloneNode(false);
-            products  = localStorage.getItem('currentProducts').split(',');
-        
+            prevElem  = container.nextElementSibling,
+            clone     = container.cloneNode(false),
+            notFound  = thisDoc.querySelector('.gallery__not-found'),
+            products;
 
-        container.remove();
-        document.querySelector('body').insertBefore(clone, prevElem);
 
-        container = thisDoc.querySelector('.gridzy');
+        if (localStorage.getItem('currentGalleryList')) {
+            products  = localStorage.getItem('currentGalleryList').split(',');
+        } else if (localStorage.getItem('allProducts')) {
+            products = localStorage.getItem('allProducts').split(',');
+        } else {
+            products = [];
+        }
         
-        products.forEach(product => {
-            let obj = JSON.parse(localStorage.getItem(product));
-            let div = thisDoc.createElement('div');
+        
+        
+        if (products.length > 0 && products[0] !== '') {
+        
+            notFound.setAttribute('style', '');
+
+            document.querySelector('body').insertBefore(clone, prevElem);
+            container.remove();
+            container = thisDoc.querySelector('.gridzy');
             
-            console.log(obj);
-            let markup = 
-                `
-                <img src="${obj.images[0]}" alt="${obj.title}">
-                <div>
-                    <h5>${obj.category}, ${obj.year}</h5>
-                    <h3>${obj.title}</h3>
-                    <span>$${obj.price}</span>
-                    <a href="${obj.link}"></a>
-                </div>
-                <div class="gridzy__video-container">
-                    <video muted class="category-item__video">
-                        <source src="${obj.video}.webm" type="video/webm">
-                        <source src="${obj.video}.mp4" type="video/mp4">
-                        <source src="${obj.video}.ogv" type="video/ogg">
-                    </video>
-                </div>
-                `;
+            products.forEach(product => {
+                let obj = JSON.parse(localStorage.getItem(product));
+                let div = thisDoc.createElement('div');
                 
-            div.innerHTML = markup;
-            container.appendChild(div);
-        });
-        console.log(container);
+                let markup = 
+                    `
+                    <img src="${obj.images[0]}" alt="${obj.title}">
+                    <div>
+                        <h5>${obj.category}, ${obj.year}</h5>
+                        <h3>${obj.title}</h3>
+                        <span>$${obj.price}</span>
+                        <a href="${obj.link}"></a>
+                    </div>
+                    <div class="gridzy__video-container">
+                        <video muted class="category-item__video">
+                            <source src="${obj.video}.webm" type="video/webm">
+                            <source src="${obj.video}.mp4" type="video/mp4">
+                            <source src="${obj.video}.ogv" type="video/ogg">
+                        </video>
+                    </div>
+                    `;
+                    
+                div.innerHTML = markup;
+                container.appendChild(div);
+            });
+        } else {
+            container.innerHTML = '';
+            notFound.style.display = 'block';
+        }
+    }   
+
+    function buildFilterForm() {
+        let thisDoc = document;
+        let container = thisDoc.querySelector('.gallery__filter-list');
+
+        let 
+            option      = thisDoc.createElement('option');
+            years       = localStorage.getItem('years').split(','),
+            categories  = localStorage.getItem('categories').split(','),
+            sizes       = localStorage.getItem('sizes').split(','),
+
+            filterCategory = container.querySelector('#filter-category'),
+            filterYear = container.querySelector('#filter-year'),
+            filterSize = container.querySelector('#filter-size');
+        
+            createOptions(filterCategory, categories, 'currentCategory');
+            createOptions(filterYear, years, 'currentYear');
+            createOptions(filterSize, sizes, 'currentSize');
+
+            function createOptions(select, array, localCurrent) {
+                array.forEach( j => {
+                    console.log(j);
+                    let item = thisDoc.createElement('option');
+                    item.setAttribute('value', j);
+                    item.innerHTML = j;
+                    console.log(j,localCurrent);
+                    localCurrent = localStorage.getItem(`${localCurrent}`);
+                    if (j == localCurrent) item.setAttribute('selected', '')
+                    select.appendChild(item);
+                })
+            } 
+
     }
-    // buildGallery();
+    setTimeout(function() {
+        buildFilterForm();
+        buildGallery();
+        buildSlider();
+    }, 100)
+    
    
     
 </script>

@@ -995,6 +995,9 @@ img.machine__noise {
     font: 34px/46px 'Playfair Display';
     padding-bottom: 4px;
     padding-top: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .category-item__subheader {
     font: 14px/16px 'Roboto';
@@ -1140,5 +1143,16 @@ img.machine__noise {
 // }
 .gallery__search {
     width: 100%;
+}
+
+.gallery__not-found {
+    position: relative;
+    padding-top: 120px;
+    width: 1200px;
+    text-align: center;
+    margin: auto;
+    color: #888888;
+    font: 400 22px/28px 'Roboto';
+    display: none;
 }
 

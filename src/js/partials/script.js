@@ -143,6 +143,10 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
             price.appendChild(span);
         });
     }
+
+    if (thisDoc.querySelector('.gallery__filter')) buildFilterForm();
+
+    if (thisDoc.querySelector('.categories')) buildCategories(); 
 });
 
 function showHideLayout(layout, popUp) {
@@ -340,7 +344,7 @@ var json = JSON.stringify({
                        "http://lorempixel.com/400/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-1",
-        "title"     : "title-1",
+        "title"     : "title 1",
         "link"      : "/product.html",
         "size"      : "small",
         "category"  : "category 1",
@@ -352,7 +356,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/401/400/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-2",
-        "title"     : "title-2",
+        "title"     : "title 2",
         "link"      : "/product.html",
         "size"      : "small",
         "category"  : "category 1",
@@ -364,7 +368,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/402/400/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-3",
-        "title"     : 'title 011',
+        "title"     : 'title 3',
         "link"      : "/product.html",
         "size"      : "small",
         "category"  : "category 1",
@@ -376,7 +380,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/403/400/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
         "video"     : "/img/video/header",
         "self"      : "product-4",
-        "title"     : "title-14",
+        "title"     : "title 4",
         "link"      : "/product.html",
         "size"      : "small",
         "category"  : "category 1",
@@ -388,7 +392,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/404/400/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-5",
-        "title"     : "title-14",
+        "title"     : "title 5",
         "link"      : "/product.html",
         "size"      : "small",
         "category"  : "category 1",
@@ -400,7 +404,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-6",
-        "title"     : "title-14",
+        "title"     : "title 6",
         "link"      : "/product.html",
         "size"      : "large",
         "category"  : "category 2",
@@ -412,7 +416,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-7",
-        "title"     : "title-14",
+        "title"     : "title 7",
         "link"      : "/product.html",
         "size"      : "large",
         "category"  : "category 2",
@@ -424,7 +428,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-8",
-        "title"     : "title-14",
+        "title"     : "title 8",
         "link"      : "/product.html",
         "size"      : "large",
         "category"  : "category 8",
@@ -436,7 +440,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-9",
-        "title"     : "title-14",
+        "title"     : "title 9",
         "link"      : "/product.html",
         "size"      : "large",
         "category"  : "category 9",
@@ -448,7 +452,7 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-10",
-        "title"     : "title-14",
+        "title"     : "title 10",
         "link"      : "/product.html",
         "size"      : "large",
         "category"  : "category 2",
@@ -460,27 +464,64 @@ var json = JSON.stringify({
         "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
         "video"     : "/img/video/header",
         "self"      : "product-11",
-        "title"     : "title-14",
+        "title"     : "title 11",
         "link"      : "/product.html",
         "size"      : "large",
         "category"  : "category 2",
         "price"     : "3999"
+    },
+
+    "categories" : {
+        "category 1" : {
+            "self"        : "category 1",
+            "products"    : ["product-1","product-2","product-3","product-4","product-5"],
+            "description" : "Some text about category"
+        },
+        
+        "category 2" : {
+            "self"        : "category 2",
+            "products"    : ["product-6","product-7","product-10","product-11"],
+            "description" : "Some text about category"
+        },
+        "category 8" : {
+            "self"        : "category 8",
+            "products"    : ["product-8"],
+            "description" : "Some text about category"
+        },
+        "category 9" : {
+            "self"        : "category 9",
+            "products"    : ["product-9"],
+            "description" : "Some text about category"
+        },
+
     }
 });
 
-
-function createLinks() {
-    var 
+function fillLocalStorage() {
+    let 
         parsedJSON  = JSON.parse(json),
         keys        = Object.keys(parsedJSON),
 
         yearLinks      = {},
         sizeLinks      = {},
-        categoryLinks  = {};
-        
+        categoryLinks  = {},
 
-    keys.forEach(i => {
-        let obj = parsedJSON[i];
+        years          = {},
+        sizes          = {},
+        categories     = {},
+        selfLinks      = {},
+        titles         = {};
+        
+        
+    keys.forEach(k => {
+        let obj = parsedJSON[k];
+
+        years[obj.year]          = true;
+        categories[obj.category] = true;
+        sizes[obj.size]          = true;
+        selfLinks[obj.self]      = true;
+        titles[obj.title]        = true;
+
 
         if (yearLinks[obj.year]) yearLinks[obj.year].push(obj.self);
         else yearLinks[obj.year] = [obj.self];
@@ -491,31 +532,34 @@ function createLinks() {
         if (categoryLinks[obj.category]) categoryLinks[obj.category].push(obj.self);
         else categoryLinks[obj.category] = [obj.self];
 
+
+        localStorage.setItem(obj.self, JSON.stringify(obj));
     });
 
     localStorage.setItem("yearLinks",     JSON.stringify(yearLinks));
     localStorage.setItem("sizeLinks",     JSON.stringify(sizeLinks));
     localStorage.setItem("categoryLinks", JSON.stringify(categoryLinks));
-    localStorage.setItem('allProducts', keys);
 
+    localStorage.setItem('years',      Object.keys(years));
+    localStorage.setItem('sizes',      Object.keys(sizes));
+    localStorage.setItem('categories', Object.keys(categories));
+    localStorage.setItem('titles',     Object.keys(titles));
+    localStorage.setItem('selfLinks',  Object.keys(selfLinks));
+
+    localStorage.setItem('allProducts', keys);
+    localStorage.setItem('json', json);
 }
 
-createLinks();
+fillLocalStorage();
 
 function getProducts() {
 
     var 
-        parsedJSON  = JSON.parse(json),
-        keys        = Object.keys(parsedJSON),
-        years       = {},
-
-        yearLinks      = [],
-        sizeLinks      = [],
-        categoryLinks  = [];
+        parsedJSON  = JSON.parse(localStorage.getItem('json')),
+        keys        = Object.keys(parsedJSON);
 
     keys.forEach(k => {
         let obj = parsedJSON[k];
-        localStorage.setItem(obj.self, JSON.stringify(obj));
 
         let 
             item    = thisDoc.createElement('li'),
@@ -530,12 +574,8 @@ function getProducts() {
         item.setAttribute('data-year', obj.year);
         
         thisDoc.querySelector('.machine__slider').appendChild(item);
-
-        years[obj.year] = true;
-    });
-
-    localStorage.setItem('years', Object.keys(years));
         
+    }); 
     
 }
 function getNextSlide(sign, year) {
@@ -544,7 +584,7 @@ function getNextSlide(sign, year) {
         years   = localStorage.getItem('years').split(','),
         current = +years.indexOf(year);
 
-    if (sign == '-')        sequent = (current + years.length - 1) % years.length;
+    if      (sign == '-')   sequent = (current + years.length - 1) % years.length;
     else if (sign == '+')   sequent = (current + years.length + 1) % years.length;
 
     else {
@@ -743,54 +783,51 @@ function filterGellery() {
                 products = localStorage.getItem('allProducts');
             } else {
                 products = filterProducts(sizesArr, yearArr, categoryArr);
-                
             }
-            localStorage.setItem('currentProducts', products);
+
+            localStorage.setItem('currentCategory', filters.category);
+            localStorage.setItem('currentYear', filters.year);
+            localStorage.setItem('currentSize', filters.size);
+            localStorage.setItem('currentGalleryList', products);
+
             buildGallery();
-            setTimeout(function() {
-                buildSlider();
-            }, 50);
         }
     });
 
     submit.onclick = function(e) {
         e.preventDefault();
+
         let inputInner = filter.querySelector('input[type=text]').value;
+        let products = [];
 
-        let products = [inputInner];
+        let titles    = localStorage.getItem('titles').split(','),
+            selfLinks = localStorage.getItem('selfLinks').split(',');
 
-        localStorage.setItem('currentProducts', products);
+        titles.forEach( (t, i) => {
+            if (t.indexOf(inputInner) != -1) {
+                products.push(selfLinks[i]);
+            }
+        }); 
+
+
+        localStorage.setItem('currentGalleryList', products);
         buildGallery();
-        setTimeout(function() {
-            buildSlider();
-        }, 50);
-        
     }
-
-
-    
 
     function filterProducts() {
 
         var prevList = result = [];
-
         Array.from(arguments).forEach( (current, i)  => {
 
             result = [];
-
-
             if (prevList.length > 0 && current !== 'all' && prevList !== 'all') {
 
                 prevList.forEach( j => {
-                    if (current.indexOf(j) != -1) {
-                        result.push(j);
-                    }
+                    if (current.indexOf(j) != -1) result.push(j);
                 })
-
                 prevList = result;
 
             } else if (i == 0 || prevList === 'all') prevList = current;
-            
         });
         
         return prevList;
@@ -811,4 +848,171 @@ function findInObj(value, obj) {
     if (value == 'all')  return 'all'
     else if (obj[value]) return obj[value];
     else                 return [];
+}    
+
+function buildSlider() {
+    let container = document.querySelector('.gridzy');
+    let elements  = Array.from(container.children);
+
+    if (elements.length > 2 ) {
+        new Gridzy(document.querySelector('.gridzy'));
+    } else {
+        elements.forEach(e => {
+            e.className = 'gridzyItemContent gridzyItem gridzyItem--another'
+        })
+    }
+
+    let galleryList = Array.from(document.querySelectorAll('.gridzyItemContent'));
+    galleryList.forEach(b => {
+
+        let video = b.querySelector('video');
+        b.onmouseover = function() {video.play();}
+        b.onmouseout  = function() {video.pause();}
+
+        let 
+            title         = b.querySelector('h3'),
+            blockW        = b.clientWidth,
+            blockH        = b.clientHeight,
+            textContainer = b.querySelector('div');
+
+
+        if (blockH > blockW) {
+            textContainer.style.alignItems  = 'flex-start';
+            title.style.fontSize = (blockW * 0.12) + 'px';
+            title.style.lineHeight = (blockW * .14) + 'px';
+        } else {
+            title.style.fontSize = (blockW * 0.08) + 'px';
+            title.style.lineHeight = (blockW * .11) + 'px';
+        }
+
+    });
+}
+
+
+function buildGallery() {
+    let 
+        thisDoc   = document,
+        container = thisDoc.querySelector('.gridzy'),
+        prevElem  = container.nextElementSibling,
+        clone     = container.cloneNode(false),
+        notFound  = thisDoc.querySelector('.gallery__not-found'),
+        products;
+
+
+    if (localStorage.getItem('currentGalleryList')) {
+        products  = localStorage.getItem('currentGalleryList').split(',');
+    } else if (localStorage.getItem('allProducts')) {
+        products = localStorage.getItem('allProducts').split(',');
+    } else {
+        products = [];
+    }
+    
+    
+    
+    if (products.length > 0 && products[0] !== '') {
+    
+        notFound.setAttribute('style', '');
+
+        document.querySelector('body').insertBefore(clone, prevElem);
+        container.remove();
+        container = thisDoc.querySelector('.gridzy');
+        
+        products.forEach(product => {
+            let obj = JSON.parse(localStorage.getItem(product));
+            let div = thisDoc.createElement('div');
+            
+            let markup = 
+                `
+                <img src="${obj.images[0]}" alt="${obj.title}">
+                <div>
+                    <h5>${obj.category}, ${obj.year}</h5>
+                    <h3>${obj.title}</h3>
+                    <span>$${obj.price}</span>
+                    <a href="${obj.link}"></a>
+                </div>
+                <div class="gridzy__video-container">
+                    <video muted class="category-item__video">
+                        <source src="${obj.video}.webm" type="video/webm">
+                        <source src="${obj.video}.mp4" type="video/mp4">
+                        <source src="${obj.video}.ogv" type="video/ogg">
+                    </video>
+                </div>
+                `;
+                
+            div.innerHTML = markup;
+            container.appendChild(div);
+        });
+    } else {
+        container.innerHTML = '';
+        notFound.style.display = 'block';
+    }
+
+    setTimeout(function() {
+        buildSlider();
+    }, 200);
+}   
+
+function buildFilterForm() {
+    let container = thisDoc.querySelector('.gallery__filter-list');
+
+    let 
+        option      = thisDoc.createElement('option');
+        years       = localStorage.getItem('years').split(','),
+        categories  = localStorage.getItem('categories').split(','),
+        sizes       = localStorage.getItem('sizes').split(','),
+
+    filterCategory = container.querySelector('#filter-category'),
+    filterYear = container.querySelector('#filter-year'),
+    filterSize = container.querySelector('#filter-size');
+
+    createOptions(filterCategory, categories, 'currentCategory');
+    createOptions(filterYear, years, 'currentYear');
+    createOptions(filterSize, sizes, 'currentSize');
+
+    function createOptions(select, array, localCurrent) {
+        array.forEach( j => {
+            console.log(j);
+            let item = thisDoc.createElement('option');
+            item.setAttribute('value', j);
+            item.innerHTML = j;
+            console.log(j,localCurrent);
+            localCurrent = localStorage.getItem(`${localCurrent}`);
+            if (j == localCurrent) item.setAttribute('selected', '')
+            select.appendChild(item);
+        })
+    } 
+
+    setTimeout(function() {
+        buildGallery();
+    }, 200);
+}
+
+
+
+function buildCategories() {
+    let container       = thisDoc.querySelector('.categories'),
+        json            = JSON.parse(localStorage.getItem('json')),
+        categories      = json['categories'],
+        categoriesKeys  = Object.keys(categories);
+    _
+    categoriesKeys.forEach(c => {
+        let current = categories[c];
+            obj     = json[current["products"][0]];
+
+        let category = thisDoc.createElement('div');
+        category.className = 'category-item';
+        category.innerHTML = 
+        `
+            <video muted class="category-item__video">
+                <source src="${obj.video}.webm" type="video/webm">
+                <source src="${obj.video}.mp4" type="video/mp4">
+                <source src="${obj.video}.ogv" type="video/ogg">
+            </video>
+            <div class="category-item__text-block">
+                <h3 class="category-item__header">${obj.category}</h3>
+                <h4 class="category-item__subheader">${current["description"]}</h4>
+            </div>
+        `;
+        container.appendChild(category);
+    });
 }

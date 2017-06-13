@@ -125,10 +125,30 @@
 .gridzyClassicLight .gridzyItem:hover .gridzyItemContent > img + * {
 	opacity: 1;
 }
+.gridzyItem:hover video,
 .gridzyItem:hover video {
 	opacity: 1;
 }
 /** SKIN Classic END **/
+
+
+.gridzy div.gridzyItem--another {
+    visibility: visible;
+    display: inline-block;
+    position: relative;
+    left: 0;
+    right: initial;
+	height: 350px;
+	width: auto;
+	margin-right: 4px;
+}
+
+.gridzyItem--another:hover video{
+	top: -100%;
+}
+.gridzyItem--another:hover >img + * {
+	opacity: 1;
+}
 
 
 .gridzy {
