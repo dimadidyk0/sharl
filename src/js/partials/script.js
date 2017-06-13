@@ -84,43 +84,31 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    let productForm = thisDoc.querySelector('#order-pop-up form');
-
-    if (productForm) {
-        var remove;
-        productForm.oninput = function() {
-            let img = thisDoc.querySelector('.place-order__img-container img');
-            img.style.opacity = '1';
-            off(remove);
-            on(img, remove);
-        }
-
-        let 
-            layout      = thisDoc.getElementById('layout'),
-            orderPopUp  = thisDoc.getElementById('order-pop-up'),
-            orderBtn    = thisDoc.querySelector('input[type="button"]');
-
-        orderBtn.onclick = function() { showHideLayout(layout, orderPopUp) };
-        layout.onclick   = function() { showHideLayout(layout, orderPopUp) };
-    }
-
     // #########################
     // ##     PRODUCT       ####
     // #########################
     
 
+    
+
+    if (thisDoc.querySelector('.gallery__filter')) buildFilterForm();
+    if (thisDoc.querySelector('.categories')) buildCategories();
+
     if (thisDoc.querySelector('.product')) {
+        
+        buildProductCard();
+        let thisDoc = document;
+        
         let 
             product     = thisDoc.querySelector('.product'),
             previewList = Array.from(product.querySelectorAll('.product__slides li')),
             face        = product.querySelector('.product__face'),
             faceList    = Array.from(face.querySelectorAll('li'));
 
+
         previewList.forEach( (li,i)  => {
 
             if (li.querySelector('video')) faceList[i].style.opacity = '1';
-            else faceList[0].style.opacity = '1';
-            
             li.onclick = function() {
                 let previous = face.querySelector('[style]');
                 if (previous) previous.removeAttribute('style');
@@ -142,11 +130,27 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
             span.style.backgroundImage = `url(/img/price-${i}.png)`;
             price.appendChild(span);
         });
+
+        let productForm = thisDoc.querySelector('#order-pop-up form');
+
+        if (productForm) {
+            var remove;
+            productForm.oninput = function() {
+                let img = thisDoc.querySelector('.place-order__img-container img');
+                img.style.opacity = '1';
+                off(remove);
+                on(img, remove);
+            }
+
+            let 
+                layout      = thisDoc.getElementById('layout'),
+                orderPopUp  = thisDoc.getElementById('order-pop-up'),
+                orderBtn    = thisDoc.querySelector('input[type="button"]');
+
+            orderBtn.onclick = function() { showHideLayout(layout, orderPopUp) };
+            layout.onclick   = function() { showHideLayout(layout, orderPopUp) };
+        }
     }
-
-    if (thisDoc.querySelector('.gallery__filter')) buildFilterForm();
-
-    if (thisDoc.querySelector('.categories')) buildCategories(); 
 });
 
 function showHideLayout(layout, popUp) {
@@ -336,139 +340,194 @@ function setListSlider(obj, date, yearSlider) {
 
 var json = JSON.stringify({
 
-    "product-1" : {
-        "year"      : "2000",
-        "images"    : ["http://lorempixel.com/400/400/",
-                       "http://lorempixel.com/300/100/",
-                       "http://lorempixel.com/350/350/",
-                       "http://lorempixel.com/400/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-1",
-        "title"     : "title 1",
-        "link"      : "/product.html",
-        "size"      : "small",
-        "category"  : "category 1",
-        "price"     : "1999"
-    },
+    "products" : {
+        "product-1" : {
+            "year"        : "2000",
+            "images"      : ["http://lorempixel.com/400/400/", "http://lorempixel.com/300/100/", "http://lorempixel.com/350/350/", "http://lorempixel.com/400/300/"], 
+            "video"       : "/img/video/header",
+            "self"        : "product-1",
+            "title"       : "title 1",
+            "link"        : "/product.html",
+            "size"        : "small",
+            "category"    : "category 1",
+            "price"       : "1999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-2"     : {
-        "year"      : "2000",
-        "images"    : ["http://lorempixel.com/401/400/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-2",
-        "title"     : "title 2",
-        "link"      : "/product.html",
-        "size"      : "small",
-        "category"  : "category 1",
-        "price"     : "6999"
-    },
+        "product-2"     : {
+            "year"      : "2000",
+            "images"    : ["http://lorempixel.com/401/400/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-2",
+            "title"     : "title 2",
+            "link"      : "/product.html",
+            "size"      : "small",
+            "category"  : "category 1",
+            "price"     : "6999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-3"     : {
-        "year"      : "2002",
-        "images"    : ["http://lorempixel.com/402/400/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-3",
-        "title"     : 'title 3',
-        "link"      : "/product.html",
-        "size"      : "small",
-        "category"  : "category 1",
-        "price"     : "5999"
-    },
+        "product-3"     : {
+            "year"      : "2002",
+            "images"    : ["http://lorempixel.com/402/400/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-3",
+            "title"     : 'title 3',
+            "link"      : "/product.html",
+            "size"      : "small",
+            "category"  : "category 1",
+            "price"     : "5999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-4"     : {
-        "year"      : "2003",
-        "images"    : ["http://lorempixel.com/403/400/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-4",
-        "title"     : "title 4",
-        "link"      : "/product.html",
-        "size"      : "small",
-        "category"  : "category 1",
-        "price"     : "4999"
-    },
+        "product-4"     : {
+            "year"      : "2003",
+            "images"    : ["http://lorempixel.com/403/400/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-4",
+            "title"     : "title 4",
+            "link"      : "/product.html",
+            "size"      : "small",
+            "category"  : "category 1",
+            "price"     : "4999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-5"     : {
-        "year"      : "2003",
-        "images"    : ["http://lorempixel.com/404/400/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-5",
-        "title"     : "title 5",
-        "link"      : "/product.html",
-        "size"      : "small",
-        "category"  : "category 1",
-        "price"     : "2999"
-    },
+        "product-5"     : {
+            "year"      : "2003",
+            "images"    : ["http://lorempixel.com/404/400/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-5",
+            "title"     : "title 5",
+            "link"      : "/product.html",
+            "size"      : "small",
+            "category"  : "category 1",
+            "price"     : "2999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-6"     : {
-        "year"      : "2003",
-        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-6",
-        "title"     : "title 6",
-        "link"      : "/product.html",
-        "size"      : "large",
-        "category"  : "category 2",
-        "price"     : "3999"
-    },
+        "product-6"     : {
+            "year"      : "2003",
+            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-6",
+            "title"     : "title 6",
+            "link"      : "/product.html",
+            "size"      : "large",
+            "category"  : "category 2",
+            "price"     : "3999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-7"     : {
-        "year"      : "2003",
-        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-7",
-        "title"     : "title 7",
-        "link"      : "/product.html",
-        "size"      : "large",
-        "category"  : "category 2",
-        "price"     : "3999"
-    },
+        "product-7"     : {
+            "year"      : "2003",
+            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-7",
+            "title"     : "title 7",
+            "link"      : "/product.html",
+            "size"      : "large",
+            "category"  : "category 2",
+            "price"     : "3999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-8"     : {
-        "year"      : "2003",
-        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-8",
-        "title"     : "title 8",
-        "link"      : "/product.html",
-        "size"      : "large",
-        "category"  : "category 8",
-        "price"     : "3999"
-    },
+        "product-8"     : {
+            "year"      : "2003",
+            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-8",
+            "title"     : "title 8",
+            "link"      : "/product.html",
+            "size"      : "large",
+            "category"  : "category 8",
+            "price"     : "3999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-9"     : {
-        "year"      : "2003",
-        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-9",
-        "title"     : "title 9",
-        "link"      : "/product.html",
-        "size"      : "large",
-        "category"  : "category 9",
-        "price"     : "3999"
-    },
+        "product-9"     : {
+            "year"      : "2003",
+            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-9",
+            "title"     : "title 9",
+            "link"      : "/product.html",
+            "size"      : "large",
+            "category"  : "category 9",
+            "price"     : "3999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-10"     : {
-        "year"      : "2003",
-        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-10",
-        "title"     : "title 10",
-        "link"      : "/product.html",
-        "size"      : "large",
-        "category"  : "category 2",
-        "price"     : "3999"
-    },
+        "product-10"     : {
+            "year"      : "2003",
+            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-10",
+            "title"     : "title 10",
+            "link"      : "/product.html",
+            "size"      : "large",
+            "category"  : "category 2",
+            "price"     : "3999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
 
-    "product-11"     : {
-        "year"      : "2003",
-        "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-        "video"     : "/img/video/header",
-        "self"      : "product-11",
-        "title"     : "title 11",
-        "link"      : "/product.html",
-        "size"      : "large",
-        "category"  : "category 2",
-        "price"     : "3999"
+        "product-11"     : {
+            "year"      : "2003",
+            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+            "video"     : "/img/video/header",
+            "self"      : "product-11",
+            "title"     : "title 11",
+            "link"      : "/product.html",
+            "size"      : "large",
+            "category"  : "category 2",
+            "price"     : "3999",
+            "description" : "some text about rhe product",
+            "parameters"  : {
+                "material"  : "metal",
+                "color"     : "black"
+            }
+        },
+
     },
 
     "categories" : {
@@ -483,24 +542,26 @@ var json = JSON.stringify({
             "products"    : ["product-6","product-7","product-10","product-11"],
             "description" : "Some text about category"
         },
+        
         "category 8" : {
             "self"        : "category 8",
             "products"    : ["product-8"],
             "description" : "Some text about category"
         },
+
         "category 9" : {
             "self"        : "category 9",
             "products"    : ["product-9"],
             "description" : "Some text about category"
-        },
-
+        }
     }
 });
 
 function fillLocalStorage() {
+    if (localStorage.getItem('LOADED') === 'true') return null;
     let 
         parsedJSON  = JSON.parse(json),
-        keys        = Object.keys(parsedJSON),
+        productKeys = Object.keys(parsedJSON["products"]),
 
         yearLinks      = {},
         sizeLinks      = {},
@@ -513,8 +574,8 @@ function fillLocalStorage() {
         titles         = {};
         
         
-    keys.forEach(k => {
-        let obj = parsedJSON[k];
+    productKeys.forEach(k => {
+        let obj = parsedJSON["products"][k];
 
         years[obj.year]          = true;
         categories[obj.category] = true;
@@ -546,8 +607,9 @@ function fillLocalStorage() {
     localStorage.setItem('titles',     Object.keys(titles));
     localStorage.setItem('selfLinks',  Object.keys(selfLinks));
 
-    localStorage.setItem('allProducts', keys);
-    localStorage.setItem('json', json);
+    localStorage.setItem('allProducts', productKeys);
+    localStorage.setItem('json',        json);
+    localStorage.setItem('LOADED',      'true');
 }
 
 fillLocalStorage();
@@ -555,7 +617,7 @@ fillLocalStorage();
 function getProducts() {
 
     var 
-        parsedJSON  = JSON.parse(localStorage.getItem('json')),
+        parsedJSON  = JSON.parse(localStorage.getItem('json'))['products'],
         keys        = Object.keys(parsedJSON);
 
     keys.forEach(k => {
@@ -563,13 +625,22 @@ function getProducts() {
 
         let 
             item    = thisDoc.createElement('li'),
-            img     = thisDoc.createElement('img');
+            img     = thisDoc.createElement('img'),
+            a       = thisDoc.createElement('a');
 
         img.setAttribute('src', obj.images[0]);
         img.setAttribute('alt', obj.title || 'Product image');
         img.setAttribute('title', obj.title || 'Product image');
 
+        a.setAttribute('href', '');
+        a.onclick = function(e) {
+            e.preventDefault();
+            localStorage.setItem('currentProduct', obj.self);
+            window.location = obj.link;
+        }
+
         item.appendChild(img);
+        item.appendChild(a);
         item.setAttribute('data-key', obj.self);
         item.setAttribute('data-year', obj.year);
         
@@ -783,6 +854,8 @@ function filterGellery() {
                 products = localStorage.getItem('allProducts');
             } else {
                 products = filterProducts(sizesArr, yearArr, categoryArr);
+
+                console.log(products)
             }
 
             localStorage.setItem('currentCategory', filters.category);
@@ -891,16 +964,18 @@ function buildSlider() {
 
 function buildGallery() {
     let 
-        thisDoc   = document,
         container = thisDoc.querySelector('.gridzy'),
         prevElem  = container.nextElementSibling,
         clone     = container.cloneNode(false),
         notFound  = thisDoc.querySelector('.gallery__not-found'),
+        json      = JSON.parse(localStorage.getItem('json')),
         products;
 
 
     if (localStorage.getItem('currentGalleryList')) {
         products  = localStorage.getItem('currentGalleryList').split(',');
+    } else if (localStorage.getItem('currentGalleryList') == '') {
+        products = [];
     } else if (localStorage.getItem('allProducts')) {
         products = localStorage.getItem('allProducts').split(',');
     } else {
@@ -916,19 +991,18 @@ function buildGallery() {
         document.querySelector('body').insertBefore(clone, prevElem);
         container.remove();
         container = thisDoc.querySelector('.gridzy');
-        
+
         products.forEach(product => {
-            let obj = JSON.parse(localStorage.getItem(product));
+            let obj = json["products"][product];
             let div = thisDoc.createElement('div');
-            
-            let markup = 
+                
+            div.innerHTML = 
                 `
                 <img src="${obj.images[0]}" alt="${obj.title}">
                 <div>
                     <h5>${obj.category}, ${obj.year}</h5>
                     <h3>${obj.title}</h3>
                     <span>$${obj.price}</span>
-                    <a href="${obj.link}"></a>
                 </div>
                 <div class="gridzy__video-container">
                     <video muted class="category-item__video">
@@ -938,8 +1012,15 @@ function buildGallery() {
                     </video>
                 </div>
                 `;
-                
-            div.innerHTML = markup;
+
+            let a = document.createElement('a');
+            a.setAttribute('href', "");
+            a.onclick = function(e) {
+                e.preventDefault();
+                localStorage.setItem('currentProduct', obj.self)
+                window.location = obj.link;
+            }
+            div.appendChild(a);
             container.appendChild(div);
         });
     } else {
@@ -971,13 +1052,11 @@ function buildFilterForm() {
 
     function createOptions(select, array, localCurrent) {
         array.forEach( j => {
-            console.log(j);
             let item = thisDoc.createElement('option');
             item.setAttribute('value', j);
             item.innerHTML = j;
-            console.log(j,localCurrent);
-            localCurrent = localStorage.getItem(`${localCurrent}`);
-            if (j == localCurrent) item.setAttribute('selected', '')
+            current = localStorage.getItem(`${localCurrent}`);
+            if (j == current) item.setAttribute('selected', '')
             select.appendChild(item);
         })
     } 
@@ -986,18 +1065,18 @@ function buildFilterForm() {
         buildGallery();
     }, 200);
 }
-
+// buildFilterForm();
 
 
 function buildCategories() {
     let container       = thisDoc.querySelector('.categories'),
         json            = JSON.parse(localStorage.getItem('json')),
-        categories      = json['categories'],
+        categories      = json['categories'];
         categoriesKeys  = Object.keys(categories);
-    _
+
     categoriesKeys.forEach(c => {
         let current = categories[c];
-            obj     = json[current["products"][0]];
+            obj     = json['products'][current['products'][0]];
 
         let category = thisDoc.createElement('div');
         category.className = 'category-item';
@@ -1013,6 +1092,92 @@ function buildCategories() {
                 <h4 class="category-item__subheader">${current["description"]}</h4>
             </div>
         `;
+
+
+        let link = thisDoc.createElement('a');
+        link.setAttribute('href', '');
+        link.onclick = function(e) {
+            e.preventDefault();
+            localStorage.setItem('currentCategory', current['self']);
+            localStorage.setItem('currentGalleryList', json['categories'][c]['products'])
+            window.location = '/gallery.html';
+        }
+
+        category.appendChild(link);
         container.appendChild(category);
     });
+}
+
+function buildProductCard() {
+    let container       = thisDoc.querySelector('.product'),
+        json            = JSON.parse(localStorage.getItem('json')),
+        currentProduct  = localStorage.getItem('currentProduct'),
+        obj             = json['products'][currentProduct],
+        product         = thisDoc.createElement('div');
+       
+
+    let images = obj['images'],
+        list   = thisDoc.createElement('ul');
+
+    images.forEach(src => {
+        let li  = thisDoc.createElement('li');
+        let img = thisDoc.createElement('img');
+        img.setAttribute('src', src);
+        li.appendChild(img);
+        list.appendChild(li);
+    });
+
+    let parameterList = thisDoc.createElement('div'),
+        parameters    = obj.parameters;
+    
+    Object.keys(parameters).forEach(p => {
+        let li = document.createElement('li');
+        li.innerHTML = `<span>${p}:</span> ${parameters[p]}</li>`;
+        parameterList.appendChild(li);
+    });
+
+    container.innerHTML  =  
+        `
+        <div class="product__container">
+            <div class="product__face">
+                <ul>
+                    ${list.innerHTML || ''}
+                    <li>
+                        <video muted class="category-item__video">
+                            <source src="${obj.video}.webm" type="video/webm">
+                            <source src="${obj.video}.mp4" type="video/mp4">
+                            <source src="${obj.video}.ogv" type="video/ogg">
+                        </video>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="product__info-block">
+                <span class="product__year">${obj.year}</span>
+                <h3 class="product__name" title="${obj.title|| ''}"><span>${obj.title|| ''}</span></h3>
+                <p class="product__description">${obj.description || ''}</p>
+
+                <ul class="product__parameters">
+                    ${parameterList.innerHTML || ''}
+                </ul>
+                <div class="product__buy-block">
+                    <div class="product__price">${obj.price || ''}</div>
+                    <input type="button" class="product__btn" value="buy">
+                </div>
+            </div>
+        </div>
+
+        <ul class="product__slides">
+            ${list.innerHTML || ''}
+            <li>
+                <video muted class="category-item__video">
+                    <source src="${obj.video}.webm" type="video/webm">
+                    <source src="${obj.video}.mp4" type="video/mp4">
+                    <source src="${obj.video}.ogv" type="video/ogg">
+                </video>
+            </li>
+        </ul>
+        `;
+
+    
 }

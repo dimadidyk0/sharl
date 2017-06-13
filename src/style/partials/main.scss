@@ -77,6 +77,13 @@ body {
          width: 100%;
          object-fit: contain;
      }
+     a {
+         position: absolute;
+         height: 1005px;
+         width: 100%;
+         left: 0;
+         top: 0;
+     }
 }
 
 li.current-slide {
@@ -969,6 +976,15 @@ img.machine__noise {
     box-sizing: border-box;
     border: 15px solid black;
     border-image: url(/img/gallery-border-image.png)14 10 14 12 round;
+
+    a {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 1;
+    }
 }
 
 .category-item__video {
