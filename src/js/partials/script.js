@@ -98,7 +98,15 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
     // #########################
     
 
-    
+    if (thisDoc.querySelector('.news')) {
+        let feathers = Array.from(thisDoc.querySelectorAll('img[class*="feather"]'));
+        feathers.forEach(f => {
+            f.onmouseover = function() {
+                f.classList.add('feather--active');
+            }
+        });
+
+    }
 
     if (thisDoc.querySelector('.gallery__filter')) buildFilterForm();
     if (thisDoc.querySelector('.categories')) buildCategories();
@@ -272,6 +280,26 @@ function setListSlider(obj, date, yearSlider) {
             dateArr =  date.split('');
 
         dateBlock.innerHTML = date;
+
+        let dataBlockBefore = thisDoc.querySelector('.machine__date-inner--before'),
+            dataBlockAfter  = thisDoc.querySelector('.machine__date-inner--after');
+
+        dataBlockBefore.innerHTML = '';
+        dataBlockAfter.innerHTML  = '';
+
+        dateArr.forEach(e => {
+            let before, after;
+            if (e == 0) before = 9;
+            else before = e - 1;
+
+            if (e == 9) after = 0
+            else after = e + 1;
+
+            dataBlockBefore.innerHTML += before;
+            dataBlockAfter.innerHTML  += after;
+        });
+
+        
         dateLampBlock.innerHTML = '';
             
         dateArr.forEach(i => {
@@ -373,6 +401,11 @@ function setListSlider(obj, date, yearSlider) {
 
             reloadGif(thisDoc.querySelector('.machine__tubes'));
             
+            let wheel = thisDoc.querySelector('.machine__wheel2');
+            wheel.classList.add('machine__wheel2--active');
+            setTimeout(function() {
+                wheel.classList.remove('machine__wheel2--active');
+            }, 1000);
         }
 
         thisDoc.querySelector('.machine__date-prev').onclick = function() {setNextSlide('-')};
@@ -460,20 +493,238 @@ function activateButterfly(cube) {
             localStorage.setItem('allEggs', true);
 
 }
-var json = JSON.stringify({
+// var json = JSON.stringify({
 
+//     "products" : {
+//         "product-1" : {
+//             "year"        : "2000",
+//             "images"      : ["http://lorempixel.com/400/400/", "http://lorempixel.com/300/100/", "http://lorempixel.com/350/350/", "http://lorempixel.com/400/300/"], 
+//             "video"       : "/img/video/header",
+//             "self"        : "product-1",
+//             "title"       : "title 1",
+//             "link"        : "/product.html",
+//             "size"        : "small",
+//             "category"    : "category 1",
+//             "price"       : "1999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-2"     : {
+//             "year"      : "2000",
+//             "images"    : ["http://lorempixel.com/401/400/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-2",
+//             "title"     : "title 2",
+//             "link"      : "/product.html",
+//             "size"      : "small",
+//             "category"  : "category 1",
+//             "price"     : "6999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-3"     : {
+//             "year"      : "2002",
+//             "images"    : ["http://lorempixel.com/402/400/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-3",
+//             "title"     : 'title 3',
+//             "link"      : "/product.html",
+//             "size"      : "small",
+//             "category"  : "category 1",
+//             "price"     : "5999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-4"     : {
+//             "year"      : "2003",
+//             "images"    : ["http://lorempixel.com/403/400/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-4",
+//             "title"     : "title 4",
+//             "link"      : "/product.html",
+//             "size"      : "small",
+//             "category"  : "category 1",
+//             "price"     : "4999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-5"     : {
+//             "year"      : "2003",
+//             "images"    : ["http://lorempixel.com/404/400/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-5",
+//             "title"     : "title 5",
+//             "link"      : "/product.html",
+//             "size"      : "small",
+//             "category"  : "category 1",
+//             "price"     : "2999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-6"     : {
+//             "year"      : "2003",
+//             "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-6",
+//             "title"     : "title 6",
+//             "link"      : "/product.html",
+//             "size"      : "large",
+//             "category"  : "category 2",
+//             "price"     : "3999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-7"     : {
+//             "year"      : "2003",
+//             "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-7",
+//             "title"     : "title 7",
+//             "link"      : "/product.html",
+//             "size"      : "large",
+//             "category"  : "category 2",
+//             "price"     : "3999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-8"     : {
+//             "year"      : "2003",
+//             "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-8",
+//             "title"     : "title 8",
+//             "link"      : "/product.html",
+//             "size"      : "large",
+//             "category"  : "category 8",
+//             "price"     : "3999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-9"     : {
+//             "year"      : "2003",
+//             "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-9",
+//             "title"     : "title 9",
+//             "link"      : "/product.html",
+//             "size"      : "large",
+//             "category"  : "category 9",
+//             "price"     : "3999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-10"     : {
+//             "year"      : "2003",
+//             "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-10",
+//             "title"     : "title 10",
+//             "link"      : "/product.html",
+//             "size"      : "large",
+//             "category"  : "category 2",
+//             "price"     : "3999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//         "product-11"     : {
+//             "year"      : "2003",
+//             "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+//             "video"     : "/img/video/header",
+//             "self"      : "product-11",
+//             "title"     : "title 11",
+//             "link"      : "/product.html",
+//             "size"      : "large",
+//             "category"  : "category 2",
+//             "price"     : "3999",
+//             "description" : "some text about rhe product",
+//             "parameters"  : {
+//                 "material"  : "metal",
+//                 "color"     : "black"
+//             }
+//         },
+
+//     },
+
+//     "categories" : {
+//         "category 1" : {
+//             "self"        : "category 1",
+//             "products"    : ["product-1","product-2","product-3","product-4","product-5"],
+//             "description" : "Some text about category"
+//         },
+        
+//         "category 2" : {
+//             "self"        : "category 2",
+//             "products"    : ["product-6","product-7","product-10","product-11"],
+//             "description" : "Some text about category"
+//         },
+        
+//         "category 8" : {
+//             "self"        : "category 8",
+//             "products"    : ["product-8"],
+//             "description" : "Some text about category"
+//         },
+
+//         "category 9" : {
+//             "self"        : "category 9",
+//             "products"    : ["product-9"],
+//             "description" : "Some text about category"
+//         }
+//     }
+// });
+
+var json = JSON.stringify( {
     "products" : {
         "product-1" : {
             "year"        : "2000",
-            "images"      : ["http://lorempixel.com/400/400/", "http://lorempixel.com/300/100/", "http://lorempixel.com/350/350/", "http://lorempixel.com/400/300/"], 
+            "images"      : ["/img/image-1.jpg"], 
             "video"       : "/img/video/header",
             "self"        : "product-1",
-            "title"       : "title 1",
+            "title"       : "PLAYBOY",
             "link"        : "/product.html",
             "size"        : "small",
-            "category"    : "category 1",
+            "category"    : "Theme",
             "price"       : "1999",
-            "description" : "some text about rhe product",
+            "description" : "some text about the product",
             "parameters"  : {
                 "material"  : "metal",
                 "color"     : "black"
@@ -481,16 +732,16 @@ var json = JSON.stringify({
         },
 
         "product-2"     : {
-            "year"      : "2000",
-            "images"    : ["http://lorempixel.com/401/400/","http://lorempixel.com/300/120/","http://lorempixel.com/360/350/","http://lorempixel.com/405/300/"], 
+            "year"      : "2001",
+            "images"    : ["/img/image-2.jpg"], 
             "video"     : "/img/video/header",
             "self"      : "product-2",
-            "title"     : "title 2",
+            "title"     : "PLAYBOY",
             "link"      : "/product.html",
             "size"      : "small",
-            "category"  : "category 1",
+            "category"  : "Lampe",
             "price"     : "6999",
-            "description" : "some text about rhe product",
+            "description" : "some text about the product",
             "parameters"  : {
                 "material"  : "metal",
                 "color"     : "black"
@@ -499,15 +750,15 @@ var json = JSON.stringify({
 
         "product-3"     : {
             "year"      : "2002",
-            "images"    : ["http://lorempixel.com/402/400/","http://lorempixel.com/300/110/","http://lorempixel.com/340/350/","http://lorempixel.com/420/300/"], 
+            "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
             "video"     : "/img/video/header",
             "self"      : "product-3",
-            "title"     : 'title 3',
+            "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
             "size"      : "small",
-            "category"  : "category 1",
+            "category"  : "Lampe",
             "price"     : "5999",
-            "description" : "some text about rhe product",
+            "description" : "some text about the product PLAYBOY LUXE",
             "parameters"  : {
                 "material"  : "metal",
                 "color"     : "black"
@@ -515,16 +766,16 @@ var json = JSON.stringify({
         },
 
         "product-4"     : {
-            "year"      : "2003",
-            "images"    : ["http://lorempixel.com/403/400/","http://lorempixel.com/320/100/","http://lorempixel.com/350/320/","http://lorempixel.com/405/301/"], 
+            "year"      : "2002",
+            "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
             "video"     : "/img/video/header",
-            "self"      : "product-4",
-            "title"     : "title 4",
+            "self"      : "product-3",
+            "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
             "size"      : "small",
-            "category"  : "category 1",
-            "price"     : "4999",
-            "description" : "some text about rhe product",
+            "category"  : "Lampe",
+            "price"     : "3999",
+            "description" : "some text about the product PLAYBOY LUXE",
             "parameters"  : {
                 "material"  : "metal",
                 "color"     : "black"
@@ -532,150 +783,70 @@ var json = JSON.stringify({
         },
 
         "product-5"     : {
-            "year"      : "2003",
-            "images"    : ["http://lorempixel.com/404/400/","http://lorempixel.com/310/100/","http://lorempixel.com/350/340/","http://lorempixel.com/420/300/"], 
+            "year"      : "2002",
+            "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
             "video"     : "/img/video/header",
-            "self"      : "product-5",
-            "title"     : "title 5",
+            "self"      : "product-3",
+            "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
             "size"      : "small",
-            "category"  : "category 1",
-            "price"     : "2999",
-            "description" : "some text about rhe product",
+            "category"  : "Lampe",
+            "price"     : "4999",
+            "description" : "some text about the product PLAYBOY LUXE",
             "parameters"  : {
                 "material"  : "metal",
                 "color"     : "black"
             }
         },
-
+        
         "product-6"     : {
-            "year"      : "2003",
-            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+            "year"      : "2002",
+            "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
             "video"     : "/img/video/header",
-            "self"      : "product-6",
-            "title"     : "title 6",
+            "self"      : "product-3",
+            "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
-            "size"      : "large",
-            "category"  : "category 2",
-            "price"     : "3999",
-            "description" : "some text about rhe product",
+            "size"      : "small",
+            "category"  : "Lampe",
+            "price"     : "1999",
+            "description" : "some text about the product PLAYBOY LUXE",
             "parameters"  : {
                 "material"  : "metal",
                 "color"     : "black"
             }
         },
-
+        
         "product-7"     : {
-            "year"      : "2003",
-            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
+            "year"      : "2002",
+            "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
             "video"     : "/img/video/header",
-            "self"      : "product-7",
-            "title"     : "title 7",
+            "self"      : "product-3",
+            "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
-            "size"      : "large",
-            "category"  : "category 2",
-            "price"     : "3999",
-            "description" : "some text about rhe product",
+            "size"      : "small",
+            "category"  : "Lampe",
+            "price"     : "2999",
+            "description" : "some text about the product PLAYBOY LUXE",
             "parameters"  : {
                 "material"  : "metal",
                 "color"     : "black"
             }
         },
-
-        "product-8"     : {
-            "year"      : "2003",
-            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-            "video"     : "/img/video/header",
-            "self"      : "product-8",
-            "title"     : "title 8",
-            "link"      : "/product.html",
-            "size"      : "large",
-            "category"  : "category 8",
-            "price"     : "3999",
-            "description" : "some text about rhe product",
-            "parameters"  : {
-                "material"  : "metal",
-                "color"     : "black"
-            }
-        },
-
-        "product-9"     : {
-            "year"      : "2003",
-            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-            "video"     : "/img/video/header",
-            "self"      : "product-9",
-            "title"     : "title 9",
-            "link"      : "/product.html",
-            "size"      : "large",
-            "category"  : "category 9",
-            "price"     : "3999",
-            "description" : "some text about rhe product",
-            "parameters"  : {
-                "material"  : "metal",
-                "color"     : "black"
-            }
-        },
-
-        "product-10"     : {
-            "year"      : "2003",
-            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-            "video"     : "/img/video/header",
-            "self"      : "product-10",
-            "title"     : "title 10",
-            "link"      : "/product.html",
-            "size"      : "large",
-            "category"  : "category 2",
-            "price"     : "3999",
-            "description" : "some text about rhe product",
-            "parameters"  : {
-                "material"  : "metal",
-                "color"     : "black"
-            }
-        },
-
-        "product-11"     : {
-            "year"      : "2003",
-            "images"    : ["http://lorempixel.com/405/400/","http://lorempixel.com/305/100/","http://lorempixel.com/350/330/","http://lorempixel.com/410/300/"], 
-            "video"     : "/img/video/header",
-            "self"      : "product-11",
-            "title"     : "title 11",
-            "link"      : "/product.html",
-            "size"      : "large",
-            "category"  : "category 2",
-            "price"     : "3999",
-            "description" : "some text about rhe product",
-            "parameters"  : {
-                "material"  : "metal",
-                "color"     : "black"
-            }
-        },
-
+        
     },
 
     "categories" : {
-        "category 1" : {
-            "self"        : "category 1",
-            "products"    : ["product-1","product-2","product-3","product-4","product-5"],
-            "description" : "Some text about category"
+        "Theme" : {
+            "self"        : "Theme",
+            "products"    : ["product-1"],
+            "description" : "Some text about category Theme"
         },
         
-        "category 2" : {
-            "self"        : "category 2",
-            "products"    : ["product-6","product-7","product-10","product-11"],
-            "description" : "Some text about category"
-        },
-        
-        "category 8" : {
-            "self"        : "category 8",
-            "products"    : ["product-8"],
-            "description" : "Some text about category"
-        },
-
-        "category 9" : {
-            "self"        : "category 9",
-            "products"    : ["product-9"],
-            "description" : "Some text about category"
-        }
+        "Lampe" : {
+            "self"        : "Lampe",
+            "products"    : ["product-2","product-3","product-4","product-5","product-6","product-7"],
+            "description" : "Some text about category Lampe"
+        }     
     }
 });
 

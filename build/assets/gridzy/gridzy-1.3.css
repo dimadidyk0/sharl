@@ -42,7 +42,7 @@
 
 .gridzyClassic .gridzyItemContent > img,
 .gridzyClassicLight .gridzyItemContent > img {
-	width: 100%;
+	/*width: 100%;*/
 	height: 100%;
 }
 
@@ -195,7 +195,7 @@
 .gridzyFullOverlay .gridzyItemContent > img,
 .gridzyFullOverlayLight .gridzyItemContent > img {
 	width: 100%;
-	height: 100%;
+	/*height: 100%;*/
 }
 
 .gridzyFullOverlay .gridzyItemContent > img + *,

@@ -209,9 +209,9 @@ li.current-slide {
 }
 .machine__date-inner {
     color: black;
-    font: 900 18px/35px 'Roboto';
-    text-indent: 10px;
-    letter-spacing: 16px;
+    font: 100 26px/18px 'Roboto';
+    text-indent: 6px;
+    letter-spacing: 13px;
     height: 100%;
 
     padding-top: 1px;
@@ -225,6 +225,29 @@ li.current-slide {
     background-size: cover;
     background-repeat: no-repeat;
     
+}
+
+.machine__date-inner--before {
+    color: black;
+    font: 100 26px/18px 'Roboto';
+    text-indent: 6px;
+    letter-spacing: 13px;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    transform: rotateX(47deg);
+}
+
+.machine__date-inner--after {
+    color: black;
+    font: 100 26px/18px 'Roboto';
+    text-indent: 6px;
+    letter-spacing: 13px;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    transform: rotateX(56deg);
+    bottom: -40px;
 }
 
 .machine__date-next {
@@ -654,7 +677,47 @@ img.machine__noise {
     }
 }
 
+.machine__megnet {
+    position: absolute;
+    top: 125px;
+    height: 50px;
+    left: 82px;
+}
 
+.machine--shake .machine__megnet {
+    animation: magnet .3s linear infinite;
+}
+
+@keyframes magnet{
+    0%   { transform: rotateX(0deg)}
+    100% { transform: rotateX(360deg)}
+}
+
+.machine__wheel1 {
+    position: absolute;
+    bottom: 145px;
+    right: 411px;
+}
+
+.machine--shake .machine__wheel1 {
+    animation: wheel 1s linear;
+}
+
+@keyframes wheel{
+    0%   { transform: rotate( 0deg)}
+    50%  { transform: rotate(30deg)}
+    100% { transform: rotate( 0deg)}
+}
+
+.machine__wheel2 {
+    position: absolute;
+    right: 25px;
+    bottom: 330px;
+}
+
+.machine__wheel2--active {
+    animation: wheel 1s linear;
+}
 
 /* ######################
 ####       ABOUT    #####
@@ -1061,6 +1124,58 @@ img.about__bug-gif {
     margin-right: auto;
 }
 
+.feather--1 {
+    position: absolute;
+    top: 20%;
+    left: 73%;
+    z-index: 2;
+    transition: all 2s ease-in-out ;
+}
+
+.feather--2 {
+    position: absolute;
+    top: 160%;
+    left: 10%;
+    z-index: 2;
+    transition: all 2s ease-in-out ;
+}
+
+.feather--3 {
+    position: absolute;
+    top: 280%;
+    left: 50%;
+    z-index: 2;
+    transition: all 2s ease-in-out ;
+}
+
+.feather--1.feather--active {
+
+    top: 30%;
+    left: 120%;
+    // animation: feather 2s ease-in forwards;
+}
+.feather--2.feather--active {
+
+    top: 180%;
+    left: -20%;
+    // animation: featherReverse  2s ease-in forwards;
+}
+.feather--3.feather--active {
+
+    top: 290%;
+    left: 150%;
+    // animation: feather 2s ease-in forwards;
+}
+
+// @keyframes feather {
+//     0%   {}
+//     100% {left: 100%}
+// }
+
+// @keyframes featherReverse {
+//     0%   {}
+//     100% {left: -100%}
+// }
 
 /* ####################
 #####  CATEGORIES #####
