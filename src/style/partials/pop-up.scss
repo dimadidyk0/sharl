@@ -4,7 +4,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     display: none;
-    z-index: 1;
+    z-index: 15;
 }
 
 .place-order {
@@ -15,9 +15,9 @@
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 5;
+    z-index: 16;
     overflow: hidden;
-    display: none;
+    visibility: hidden;
     form {
         display: flex;
         flex-direction: column;
@@ -69,6 +69,18 @@
     }
 }
 
+.place-order > div {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: -100%;
+    transition: bottom 1s ease-in;
+}
+.place-order[style] > div{
+    bottom: 0;
+}
+
 .place-order__img-container {
     width: 850px;
     height: 790px;
@@ -90,4 +102,18 @@
     }
 }
 
+#thank {
+    width: 675px;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: auto;
+    z-index: 16;
+    top: -100%;
+    transition: all 1s ease-out;
+}
 
+#thank.thank--active {
+    top: 0;
+}

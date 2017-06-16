@@ -54,13 +54,16 @@ window.onload = function() {
         categories.forEach(c => {
             let video = c.querySelector('video');
             c.onmouseover = function() {
+                video.style.zIndex = '0';
                 video.play();
             }
             c.onmouseout = function() {
+                video.removeAttribute('style'); 
                 video.pause();
             }
          });
     }
+    
 }
 
 // #########################
@@ -69,20 +72,26 @@ window.onload = function() {
 
 thisDoc.addEventListener("DOMContentLoaded", function() {
 
-    let cactus = thisDoc.querySelector('.header__cactus');
-    if (localStorage.getItem('cactus')) cactus.remove();
-    else {
-        cactus.onclick = function() {
-            cactus.setAttribute('src', '/img/gif/cactus.gif');
-            cactus.classList.add('cactus-animation');
-            setTimeout(function(){
-                cactus.remove();
-            },13000);
-            localStorage.setItem('cactus', true);
-            let pressedAnimationCount = localStorage.getItem('pressed');
-            scorePressed();
-        }
-    }
+    let cactus = thisDoc.querySelector('.header__cactus'),
+        cog    = thisDoc.querySelector('.machine__cog'),
+        nut    = thisDoc.querySelector('.machine__nut'),
+        bug    = thisDoc.querySelector('.about__bug'),
+        cube   = thisDoc.querySelector('.header__cube-rotates');
+
+    if (localStorage.getItem('cactus') && cactus) cactus.remove();
+    else if (cactus) activateEasterEgg(cactus, 'cactus',  18000);
+    
+    if (localStorage.getItem('cog') && cog) cog.remove();
+    else if (cog) activateEasterEgg(cog, 'cog',  11000);
+    
+    if (localStorage.getItem('nut') && nut) nut.remove();
+    else if (nut) activateEasterEgg(nut, 'nut', 10000);
+
+    if (localStorage.getItem('bug') && bug) bug.remove();
+    else if (bug) activateEasterEgg(bug, 'bug',  4000);
+
+    if (localStorage.getItem('allEggs') && cube) cube.remove();
+
 
     // #########################
     // ##     PRODUCT       ####
@@ -145,11 +154,35 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
             let 
                 layout      = thisDoc.getElementById('layout'),
                 orderPopUp  = thisDoc.getElementById('order-pop-up'),
-                orderBtn    = thisDoc.querySelector('input[type="button"]');
+                orderBtn    = thisDoc.querySelector('input[type="button"]'),
+                thankYou    = thisDoc.getElementById('thank');
 
             orderBtn.onclick = function() { showHideLayout(layout, orderPopUp) };
             layout.onclick   = function() { showHideLayout(layout, orderPopUp) };
+
+            productForm.onsubmit = function(e) {
+                e.preventDefault();
+                orderPopUp.removeAttribute('style');
+                thankYou.className = 'thank--active';
+
+                let img = thankYou.querySelector('img'),
+                    src = img.getAttribute('src');  
+                img.setAttribute('src', src);
+
+                let a = setTimeout(function a() {
+                    thankYou.removeAttribute('class');
+                    clearTimeout(a);
+                } , 4000);
+
+                let b = setTimeout(function b() {
+                    layout.removeAttribute('style');
+                    clearTimeout(b);
+                } , 5000);
+
+            }
         }
+
+        
     }
 });
 
@@ -160,7 +193,7 @@ function showHideLayout(layout, popUp) {
         popUp.removeAttribute('style');
     } else {
         layout.style.display = 'block';
-        popUp.style.display = 'block';
+        popUp.style.visibility = 'initial';
     }
 
 }
@@ -200,7 +233,7 @@ function setListSlider(obj, date, yearSlider) {
         slides[current].classList.add('current-slide');
         if (date) {
             changeProductDate();
-            whiteNoise();
+            animateMachine();
         }
     };
 
@@ -210,20 +243,25 @@ function setListSlider(obj, date, yearSlider) {
         slides[current].classList.add('current-slide');
         if (date) {
             changeProductDate();
-            whiteNoise();
+            animateMachine();
         }
     };
 
-    function whiteNoise() {
+    function animateMachine() {
         let noise   = thisDoc.querySelector('.machine__noise'),
             machine = thisDoc.querySelector('.machine');
 
         machine.classList.add('machine--shake');
         noise.style.display = 'block';
+        
         setTimeout(function() {
             noise.removeAttribute('style');
             machine.classList.remove('machine--shake');
         }, 1000);
+
+        reloadGif(machine.querySelector('.machine__main-img'));
+
+        // machine.querySelector('')
     };
 
     function changeProductDate() {
@@ -237,14 +275,17 @@ function setListSlider(obj, date, yearSlider) {
         dateLampBlock.innerHTML = '';
             
         dateArr.forEach(i => {
-            let span = thisDoc.createElement('span');
-            span.setAttribute('data-content', i);
-            span.innerHTML = i;
-            if (i === '.') i = 'point';
-            span.style.backgroundImage = `url(/img/price-${i}.png)`;
-            dateLampBlock.appendChild(span);
+            let lamp  = thisDoc.createElement('span'),
+                value = thisDoc.createElement('span');
+            value.setAttribute('data-content', i);
+            if (i === '.') i = '12';
+            else if (i === '-') i = '11';
+            value.style.backgroundPositionY = `calc(${i} * -54px )`;
+            value.style.animation = 'lampDate .5s 1';
+            lamp.appendChild(value);
+            dateLampBlock.appendChild(lamp);
         });
-
+    
     } 
 
     nextBtn.onclick = function() {
@@ -284,7 +325,7 @@ function setListSlider(obj, date, yearSlider) {
 
 
     let 
-        zoom    = thisDoc.querySelector('.machine__zoom'),
+        zoom       = thisDoc.querySelector('.machine__zoom'),
         photosBtn  = thisDoc.querySelector('.machine__photos-btn'),
         videoBtn   = thisDoc.querySelector('.machine__video-btn');
 
@@ -329,6 +370,9 @@ function setListSlider(obj, date, yearSlider) {
 
             let slides = Array.from(slider.querySelectorAll('li'));
             current = slides.indexOf(nextSlide);
+
+            reloadGif(thisDoc.querySelector('.machine__tubes'));
+            
         }
 
         thisDoc.querySelector('.machine__date-prev').onclick = function() {setNextSlide('-')};
@@ -337,7 +381,85 @@ function setListSlider(obj, date, yearSlider) {
     }
 };
 
+function reloadGif(img) {
+    img.setAttribute('src', img.getAttribute('src'));
+}
 
+function activateEasterEgg(elem, string, timeout) {
+
+    elem.addEventListener('mouseover',  function activate() {  
+
+
+        let eggCount = localStorage.getItem('eggs');
+        if (eggCount)  localStorage.setItem('eggs', (+eggCount + 1))
+        else localStorage.setItem('eggs', 1);
+         
+        let src    = elem.getAttribute('src'),
+            newSrc = src.replace('.png', '.gif');
+
+        let image_clone = new Image();
+        image_clone.src = newSrc;
+        image_clone.onload = function() {
+            elem.setAttribute('src', newSrc);
+            elem.className += '-gif';
+        }
+
+        let cube         = thisDoc.querySelector('.header__cube-rotates'),
+            cubeSrc      = cube.getAttribute('src')
+            cubeSmoke    = new Image(),
+            cubeSmokeSrc = cubeSrc.replace('cube-rotates', 'header-cube');
+        cubeSmoke.src = cubeSmokeSrc;
+        
+        setTimeout(function() {
+            cube.setAttribute('src', cubeSmokeSrc);
+            cube.className = 'header__cube';
+        }, +timeout - 1500)
+
+        setTimeout(function() {
+            elem.remove();
+        }, timeout);
+
+        setTimeout(function() {
+            cube.className = 'header__cube-rotates';
+            cube.setAttribute('src', cubeSrc);
+
+            if (eggCount == '3') activateButterfly(cube);
+        }, +timeout + 1500)
+        
+
+        elem.removeEventListener('mouseover', activate);
+        localStorage.setItem(string, true);
+
+        
+    });
+}
+
+
+function activateButterfly(cube) {
+
+            let batterfly = new Image();
+            batterfly.src = '/img/butterfly.gif';
+            batterfly.onload = function() {
+                let img = thisDoc.createElement('img');
+                img.setAttribute('src', batterfly.src);
+                img.className = 'header__butterfly';
+                img.setAttribute('style', 'display: none;')
+                thisDoc.querySelector('header').appendChild(img);
+
+                cube.className = 'header__cube';
+                cube.setAttribute('src', cubeSmokeSrc);     
+                setTimeout(function() {
+                    cube.remove();
+                    img.removeAttribute('style');
+                }, 1500);
+                setTimeout(function() {
+                    img.remove()
+                }, 9500)
+            } 
+
+            localStorage.setItem('allEggs', true);
+
+}
 var json = JSON.stringify({
 
     "products" : {
@@ -718,10 +840,15 @@ function getProductVideo() {
         li      = thisDoc.createElement('li'),
         video   = thisDoc.createElement('video');
     
-    video.setAttribute('src', videoSrc);
     video.load();
     video.setAttribute('controls', '');
     video.setAttribute('autobuffer', '');
+    video.innerHTML = 
+    `
+        <source src="${videoSrc}.webm" type="video/webm">
+        <source src="${videoSrc}.mp4" type="video/mp4">
+        <source src="${videoSrc}.ogv" type="video/ogg">
+    `;
     li.appendChild(video);
     slider.appendChild(video);
 }
@@ -1082,6 +1209,7 @@ function buildCategories() {
         category.className = 'category-item';
         category.innerHTML = 
         `
+            
             <video muted class="category-item__video">
                 <source src="${obj.video}.webm" type="video/webm">
                 <source src="${obj.video}.mp4" type="video/mp4">
@@ -1103,7 +1231,11 @@ function buildCategories() {
             window.location = '/gallery.html';
         }
 
+        let span = thisDoc.createElement('span');
+        span.setAttribute('style', `background-image: url(${obj.images[0]});`);
+
         category.appendChild(link);
+        category.appendChild(span);
         container.appendChild(category);
     });
 }
@@ -1143,7 +1275,7 @@ function buildProductCard() {
                 <ul>
                     ${list.innerHTML || ''}
                     <li>
-                        <video muted class="category-item__video">
+                        <video muted controls>
                             <source src="${obj.video}.webm" type="video/webm">
                             <source src="${obj.video}.mp4" type="video/mp4">
                             <source src="${obj.video}.ogv" type="video/ogg">

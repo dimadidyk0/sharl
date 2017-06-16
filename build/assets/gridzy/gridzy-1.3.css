@@ -156,9 +156,10 @@
     width: 1200px;
     margin: auto;
 	padding-top: 20px;
+    top: 185px;
 }
 
-.gridzy a {
+.gridzy.gridzyClassic .gridzyItem a {
 	position: absolute;
 	height: 100%;
 	width: 100%;
