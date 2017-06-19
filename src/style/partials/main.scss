@@ -2,12 +2,19 @@ body {
     background: #180222;
 }
 
-.main {
+.main,
+.main__container {
     height: 100%;
     width: 100%;
-    position: absolute;
     top: 0;
+    position: absolute;
+    opacity: 1;
+    transition: opacity 1s ease-out;
     z-index: 20;
+    overflow: hidden;
+}
+
+.main__container {
     background-color: black;
     background-image: radial-gradient(65vh, #7b04ff, #000);
 }
@@ -44,6 +51,41 @@ body {
     height: 11vh;
 }
 
+.main__smoke {
+    transform: rotate(180deg);
+    position: absolute;
+    bottom: 0;
+    bottom: -20vh;
+    width: 50vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.main__smoke--left {
+    left: 66.5vh;
+}
+
+.main__smoke--right {
+    right: 66.5vh;
+}
+
+.main__steam {
+    position: absolute;
+    animation: steam 10s forwards;
+    width: 200%;
+    bottom: -100%;
+    z-index: 100;
+}
+
+@keyframes steam  {
+    0%   {bottom: -1600px}
+    60% {opacity: 1;}
+    80% {bottom: 50%;} 
+    100% {opacity: 0; bottom: 100%}
+}
+
 /* #########################
 ########   MACHINE   #######
 ######################### */
@@ -58,6 +100,13 @@ body {
     bottom: 0;
     transition: all 0.5s ease-in-out;
 
+}
+
+.machine__camera {
+    position: absolute;
+    right: 56px;
+    height: 140px;
+    top: -54px;
 }
 
 .machine__slider {
@@ -274,25 +323,27 @@ li.current-slide {
     cursor: pointer;
 }
 
-.machine--shake {
-    animation: shake 1s linear;
-}
+// .machine--shake {
+//     animation: shake 1s linear;
+// }
 
-@keyframes shake{
+// @keyframes shake{
 
-0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
-10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
-20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
-30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
-40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
-50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
-60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
-70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
-80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
-90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
-100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+// 0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+// 10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+// 20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+// 30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+// 40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+// 50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+// 60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+// 70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+// 80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+// 90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+// 100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
 
-}
+// }
+
+
 @keyframes lampDate{ 
     0% {opacity: .3}
     32% {opacity: .3}
@@ -677,14 +728,14 @@ img.machine__noise {
     }
 }
 
-.machine__megnet {
+.machine__magnet {
     position: absolute;
     top: 125px;
     height: 50px;
     left: 82px;
 }
 
-.machine--shake .machine__megnet {
+.machine--shake .machine__magnet {
     animation: magnet .3s linear infinite;
 }
 
@@ -700,6 +751,10 @@ img.machine__noise {
 }
 
 .machine--shake .machine__wheel1 {
+    animation: wheel 1s linear;
+}
+
+.machine--shake .machine__wheel2 {
     animation: wheel 1s linear;
 }
 
@@ -744,7 +799,7 @@ img.machine__noise {
 
 
 .about__text {
-    height: 93%;
+    // height: 100%;
     width: 50%;
     padding: 0 4% 5%;
     box-sizing: border-box;
@@ -752,14 +807,18 @@ img.machine__noise {
     top: 6.5%;
     left: 27.6%;
     color: #343434;
-    overflow: scroll;
+    overflow: hidden;
     background: url(/img/about/sheet.png) no-repeat;
     background-size: cover;
+    background-repeat: initial;
+    transition: height .5s ease-in;
+    height: 100px;
 
     h1 {
         font: 600 2.05em/1 "Playfair Display";
         color: #41244C;
         padding: 1.5em 0 0.6em;
+        cursor: pointer;
     }
     p {
         font: 400 0.76em/1.8em "Roboto";
@@ -777,6 +836,30 @@ img.machine__noise {
             padding: 0 1.5em 0 0;
         }
     }
+}
+
+.about__text--active {
+    height: 150%;
+    background-repeat: round;
+    min-height: auto;
+    overflow: scroll;
+}
+
+.about__camera {    
+    height: 113px;
+    width: 113px;
+    top: 175px;
+    left: 10px;
+    right: 0;
+    margin: 0 auto;
+    position: absolute;
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+    background-image: url(/img/about-camera.png);
+}
+
+.about__camera:hover {
+    background-image: url(/img/about-camera--hover.png);
 }
 
 .about__links {
@@ -1124,48 +1207,59 @@ img.about__bug-gif {
     margin-right: auto;
 }
 
-.feather--1 {
+img[class*=feather] {
     position: absolute;
     top: 20%;
     left: 73%;
     z-index: 2;
-    transition: all 2s ease-in-out ;
 }
 
-.feather--2 {
-    position: absolute;
-    top: 160%;
-    left: 10%;
-    z-index: 2;
-    transition: all 2s ease-in-out ;
+.feather-gif {
+    animation: feather 4s linear forwards infinite;
 }
 
-.feather--3 {
-    position: absolute;
-    top: 280%;
-    left: 50%;
-    z-index: 2;
-    transition: all 2s ease-in-out ;
+@keyframes feather {
+    0%   {top: 16%; left: 79%; }
+    20%  {top: 15%; left: 80%;}
+    40%  {top: 14%; left: 81%; transform: rotatey(50deg)}
+    60%  {top: 13%; left: 82%;transform: rotatey(20deg)}
+    80%  {top: 12%; left: 83%; transform: rotatey(40deg)}
+    100% {top: 11%; left: 84%;}
 }
+// .feather--2 {
+//     position: absolute;
+//     top: 160%;
+//     left: 10%;
+//     z-index: 2;
+//     transition: all 2s ease-in-out ;
+// }
 
-.feather--1.feather--active {
+// .feather--3 {
+//     position: absolute;
+//     top: 280%;
+//     left: 50%;
+//     z-index: 2;
+//     transition: all 2s ease-in-out ;
+// }
 
-    top: 30%;
-    left: 120%;
-    // animation: feather 2s ease-in forwards;
-}
-.feather--2.feather--active {
+// .feather--1.feather--active {
 
-    top: 180%;
-    left: -20%;
-    // animation: featherReverse  2s ease-in forwards;
-}
-.feather--3.feather--active {
+//     top: 30%;
+//     left: 120%;
+//     // animation: feather 2s ease-in forwards;
+// }
+// .feather--2.feather--active {
 
-    top: 290%;
-    left: 150%;
-    // animation: feather 2s ease-in forwards;
-}
+//     top: 180%;
+//     left: -20%;
+//     // animation: featherReverse  2s ease-in forwards;
+// }
+// .feather--3.feather--active {
+
+//     top: 290%;
+//     left: 150%;
+//     // animation: feather 2s ease-in forwards;
+// }
 
 // @keyframes feather {
 //     0%   {}

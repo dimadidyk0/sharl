@@ -37,16 +37,64 @@ window.onload = function() {
     if (preloader) preloader.remove();
     else console.log('Preloader not found')
 
-    if (thisDoc.querySelector('.machine__slider')) {
-        getProducts()
-        let machineSliderObj = {
-            slider      : thisDoc.querySelector('.machine__slider'), 
-            nextBtn     : thisDoc.querySelector('.machine__next'),
-            prevBtn     : thisDoc.querySelector('.machine__prev'),
-            playPause   : thisDoc.querySelector('.machine__play-pause')
+    if (window.location.pathname === '/') {
+
+        let isVisited = localStorage.getItem('visited'),
+            main = document.querySelector('.main');
+
+        if (!isVisited) {
+            setTimeout(function(){
+                steamPage();
+            }, 1000);    
+        } else {
+            main.remove()
         }
 
-        setListSlider(machineSliderObj, true, true);
+        function steamPage() {
+
+            localStorage.setItem('visited', true);
+
+            let 
+                steamInterval     = 500,
+                steamImages       = 10,
+                containerTimeout  = 7000,
+                mainTimeout       = 13000;
+            //  animationDuration = 10s (in CSS)
+            //  main & container transition = 1s (in CSS)
+
+            let firstImg = main.querySelector('img[src*=steam]');
+                firstImg.classList.add('main__steam');
+                
+
+            var createSteam = setInterval(function() {
+
+                let steam          = firstImg.cloneNode(true),
+                    left           = ( Math.round(Math.random() * 50) - 45) + '%',
+                    bottom         = ( Math.round(Math.random() * 60)) + '%',
+                    steamContainer = main.querySelector('.steam-container');
+
+                steam.setAttribute('style', `left: ${left}; margin-bottom: -${bottom};`);
+                steamContainer.appendChild(steam);
+
+            }, steamInterval);
+
+                setTimeout(function() {
+                clearInterval(createSteam);
+            }, steamImages * steamInterval);
+
+            setTimeout(function() {
+                let container = main.querySelector('.main__container');
+                container.style.opacity = '0';
+            }, containerTimeout)
+
+            setTimeout(function() {
+                main.style.opacity = '0';
+            }, mainTimeout);
+
+            setTimeout(function() {
+                main.remove();
+            }, mainTimeout + 1000);
+        }
     }
 
     if (thisDoc.querySelector('.categories')) {
@@ -72,11 +120,24 @@ window.onload = function() {
 
 thisDoc.addEventListener("DOMContentLoaded", function() {
 
-    let cactus = thisDoc.querySelector('.header__cactus'),
-        cog    = thisDoc.querySelector('.machine__cog'),
-        nut    = thisDoc.querySelector('.machine__nut'),
-        bug    = thisDoc.querySelector('.about__bug'),
-        cube   = thisDoc.querySelector('.header__cube-rotates');
+    if (thisDoc.querySelector('.machine__slider')) {
+        getProducts()
+        let machineSliderObj = {
+            slider      : thisDoc.querySelector('.machine__slider'), 
+            nextBtn     : thisDoc.querySelector('.machine__next'),
+            prevBtn     : thisDoc.querySelector('.machine__prev'),
+            playPause   : thisDoc.querySelector('.machine__play-pause')
+        }
+
+        setListSlider(machineSliderObj, true, true);
+    }
+
+    let cactus  = thisDoc.querySelector('.header__cactus'),
+        cog     = thisDoc.querySelector('.machine__cog'),
+        nut     = thisDoc.querySelector('.machine__nut'),
+        bug     = thisDoc.querySelector('.about__bug'),
+        cube    = thisDoc.querySelector('.header__cube-rotates'),
+        feather = thisDoc.querySelector('img.feather');
 
     if (localStorage.getItem('cactus') && cactus) cactus.remove();
     else if (cactus) activateEasterEgg(cactus, 'cactus',  18000);
@@ -90,6 +151,9 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
     if (localStorage.getItem('bug') && bug) bug.remove();
     else if (bug) activateEasterEgg(bug, 'bug',  4000);
 
+    if (localStorage.getItem('feather') && feather) feather.remove();
+    else if (feather) activateEasterEgg(feather, "feather", 5000);
+
     if (localStorage.getItem('allEggs') && cube) cube.remove();
 
 
@@ -97,16 +161,14 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
     // ##     PRODUCT       ####
     // #########################
     
+    if (thisDoc.querySelector('.about')) {
+        let textBlock = thisDoc.querySelector('.about__text'),
+            header    = textBlock.querySelector('h1');
 
-    if (thisDoc.querySelector('.news')) {
-        let feathers = Array.from(thisDoc.querySelectorAll('img[class*="feather"]'));
-        feathers.forEach(f => {
-            f.onmouseover = function() {
-                f.classList.add('feather--active');
-            }
-        });
-
-    }
+        header.onclick = function() {
+            textBlock.classList.add('about__text--active');
+        }
+    } 
 
     if (thisDoc.querySelector('.gallery__filter')) buildFilterForm();
     if (thisDoc.querySelector('.categories')) buildCategories();
@@ -256,7 +318,7 @@ function setListSlider(obj, date, yearSlider) {
     };
 
     function animateMachine() {
-        let noise   = thisDoc.querySelector('.machine__noise'),
+        let noise   = thisDoc.querySelector('.machine__noise');
             machine = thisDoc.querySelector('.machine');
 
         machine.classList.add('machine--shake');
@@ -290,10 +352,10 @@ function setListSlider(obj, date, yearSlider) {
         dateArr.forEach(e => {
             let before, after;
             if (e == 0) before = 9;
-            else before = e - 1;
+            else before = +e - 1;
 
             if (e == 9) after = 0
-            else after = e + 1;
+            else after = +e + 1;
 
             dataBlockBefore.innerHTML += before;
             dataBlockAfter.innerHTML  += after;
@@ -1004,7 +1066,8 @@ function getProductVideo() {
         slider      = thisDoc.querySelector('.gallery-projector__slider'),
         urn         = thisDoc.querySelector('.current-slide').getAttribute('data-key'),
         product     = JSON.parse(localStorage.getItem(urn));
-        videoSrc    = product.video;
+        videoSrc    = product.video,
+        projector   = slider.parentNode;
 
     slider.innerHTML = '';
     let 
@@ -1012,7 +1075,7 @@ function getProductVideo() {
         video   = thisDoc.createElement('video');
     
     video.load();
-    video.setAttribute('controls', '');
+    video.setAttribute('loop', '');
     video.setAttribute('autobuffer', '');
     video.innerHTML = 
     `
@@ -1020,8 +1083,29 @@ function getProductVideo() {
         <source src="${videoSrc}.mp4" type="video/mp4">
         <source src="${videoSrc}.ogv" type="video/ogg">
     `;
+
     li.appendChild(video);
     slider.appendChild(video);
+
+    let 
+        playPause   = projector.querySelector('.gallery-projector__play-pause'),
+        next        = projector.querySelector('.gallery-projector__next'),
+        prev        = projector.querySelector('.gallery-projector__prev');
+
+    playPause.onclick = function() {
+        if (video.paused == false) video.pause();
+        else video.play();
+    }
+
+    next.onclick = function() {
+        video.currentTime =  video.currentTime + video.duration / 10;
+    }
+
+    prev.onclick = function() {
+        video.currentTime =  video.currentTime - video.duration / 10;
+    }
+
+
 }
 
 function buildProjectorSlider() {
