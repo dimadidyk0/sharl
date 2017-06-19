@@ -717,7 +717,7 @@ var json = JSON.stringify( {
         "product-1" : {
             "year"        : "2000",
             "images"      : ["/img/image-1.jpg"], 
-            "video"       : "/img/video/header",
+            "video"       : "/img/video/credits",
             "self"        : "product-1",
             "title"       : "PLAYBOY",
             "link"        : "/product.html",
@@ -734,7 +734,7 @@ var json = JSON.stringify( {
         "product-2"     : {
             "year"      : "2001",
             "images"    : ["/img/image-2.jpg"], 
-            "video"     : "/img/video/header",
+            "video"     : "/img/video/credits",
             "self"      : "product-2",
             "title"     : "PLAYBOY",
             "link"      : "/product.html",
@@ -751,7 +751,7 @@ var json = JSON.stringify( {
         "product-3"     : {
             "year"      : "2002",
             "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
-            "video"     : "/img/video/header",
+            "video"     : "/img/video/credits",
             "self"      : "product-3",
             "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
@@ -768,7 +768,7 @@ var json = JSON.stringify( {
         "product-4"     : {
             "year"      : "2002",
             "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
-            "video"     : "/img/video/header",
+            "video"     : "/img/video/credits",
             "self"      : "product-3",
             "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
@@ -785,7 +785,7 @@ var json = JSON.stringify( {
         "product-5"     : {
             "year"      : "2002",
             "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
-            "video"     : "/img/video/header",
+            "video"     : "/img/video/credits",
             "self"      : "product-3",
             "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
@@ -802,7 +802,7 @@ var json = JSON.stringify( {
         "product-6"     : {
             "year"      : "2002",
             "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
-            "video"     : "/img/video/header",
+            "video"     : "/img/video/credits",
             "self"      : "product-3",
             "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
@@ -819,7 +819,7 @@ var json = JSON.stringify( {
         "product-7"     : {
             "year"      : "2002",
             "images"    : ["/img/image-3.jpg","/img/image-3-1.jpg"], 
-            "video"     : "/img/video/header",
+            "video"     : "/img/video/credits",
             "self"      : "product-3",
             "title"     : 'PLAYBOY LUXE',
             "link"      : "/product.html",
