@@ -55,7 +55,6 @@
 
 
 
-
 header {
     width: 1200px;
     margin: auto;
@@ -70,12 +69,24 @@ header {
     }
 }
 
+.header__butterfly-static {
+    position: absolute;
+    top: 27px;
+    transform: rotate(20deg);
+    left: 323px;
+    z-index: 20;
+    height: 60px;
+}
+
+
 .header__butterfly {
     position: absolute;
     right: -85px;
     top: 70px;
+    height: 60px;
     transform: rotate(-145deg);
-    animation: butterfly 8s 1 linear forwards ;
+    animation: butterfly 4s linear forwards infinite,
+               butterfly-to-header 4s 4s forwards infinite;
 }
 
 @keyframes butterfly{
@@ -93,4 +104,8 @@ header {
     88%  { top: -140px; right: 850px; }
 
     100% { top: -210px; right: 850px; display: none; transform: rotate( -35deg);}
+}
+@keyframes butterfly-to-header{
+    0%   { top:   570px; left: -500px; transform: rotate(55deg); }
+    100% { top: 27px; transform: rotate(20deg); left: 323px;}
 }

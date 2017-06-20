@@ -33,11 +33,13 @@ var timeout;
 
 window.onload = function() {
 
+    localStorage.setItem('isGifPlays', 'false');
+
     let preloader = thisDoc.querySelector('#preloader')
     if (preloader) preloader.remove();
     else console.log('Preloader not found')
 
-    if (window.location.pathname === '/') {
+    if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
 
         let isVisited = localStorage.getItem('visited'),
             main = document.querySelector('.main');
@@ -45,7 +47,7 @@ window.onload = function() {
         if (!isVisited) {
             setTimeout(function(){
                 steamPage();
-            }, 1000);    
+            }, 2500);    
         } else {
             main.remove()
         }
@@ -56,7 +58,7 @@ window.onload = function() {
 
             let 
                 steamInterval     = 500,
-                steamImages       = 10,
+                steamImages       = 8,
                 containerTimeout  = 7000,
                 mainTimeout       = 13000;
             //  animationDuration = 10s (in CSS)
@@ -111,6 +113,11 @@ window.onload = function() {
             }
          });
     }
+
+    if (thisDoc.querySelector('.about')) {
+        let about = thisDoc.querySelector('.about');
+        about.classList.add('about--active');
+    }
     
 }
 
@@ -137,38 +144,41 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
         nut     = thisDoc.querySelector('.machine__nut'),
         bug     = thisDoc.querySelector('.about__bug'),
         cube    = thisDoc.querySelector('.header__cube-rotates'),
-        feather = thisDoc.querySelector('img.feather');
+        feather = thisDoc.querySelector('img[class*=feather]'),
+        ball    = thisDoc.querySelector('img[class*=about__ball]');
 
     if (localStorage.getItem('cactus') && cactus) cactus.remove();
-    else if (cactus) activateEasterEgg(cactus, 'cactus',  18000);
+    else if (cactus) activateEasterEgg(cactus, 'cactus',  6700);
     
     if (localStorage.getItem('cog') && cog) cog.remove();
-    else if (cog) activateEasterEgg(cog, 'cog',  11000);
+    else if (cog) activateEasterEgg(cog, 'cog',  5600);
     
     if (localStorage.getItem('nut') && nut) nut.remove();
-    else if (nut) activateEasterEgg(nut, 'nut', 10000);
+    else if (nut) activateEasterEgg(nut, 'nut', 5100);
 
     if (localStorage.getItem('bug') && bug) bug.remove();
-    else if (bug) activateEasterEgg(bug, 'bug',  4000);
+    else if (bug) activateEasterEgg(bug, 'bug',  5000);
 
     if (localStorage.getItem('feather') && feather) feather.remove();
-    else if (feather) activateEasterEgg(feather, "feather", 5000);
+    else if (feather) activateEasterEgg(feather, "feather", 10000);
 
-    if (localStorage.getItem('allEggs') && cube) cube.remove();
+    if (localStorage.getItem('ball') && ball) ball.remove();
+    else if (ball) activateEasterEgg(ball, "ball", 7000);
+
+    if (localStorage.getItem('allEggs') && cube) {
+        cube.remove();
+        thisDoc.querySelector('.header__butterfly-static').removeAttribute('style');
+    } else if (cube) {
+        let eggs   = +localStorage.getItem('eggs') || 0,
+            src    = cube.getAttribute('src'),
+            newSrc = src.replace('0', eggs);
+        cube.setAttribute('src', newSrc);
+    }
 
 
     // #########################
     // ##     PRODUCT       ####
     // #########################
-    
-    if (thisDoc.querySelector('.about')) {
-        let textBlock = thisDoc.querySelector('.about__text'),
-            header    = textBlock.querySelector('h1');
-
-        header.onclick = function() {
-            textBlock.classList.add('about__text--active');
-        }
-    } 
 
     if (thisDoc.querySelector('.gallery__filter')) buildFilterForm();
     if (thisDoc.querySelector('.categories')) buildCategories();
@@ -330,6 +340,7 @@ function setListSlider(obj, date, yearSlider) {
         }, 1000);
 
         reloadGif(machine.querySelector('.machine__main-img'));
+        reloadGif(machine.querySelector('.machine__wheel3'));
 
         // machine.querySelector('')
     };
@@ -482,51 +493,66 @@ function reloadGif(img) {
 
 function activateEasterEgg(elem, string, timeout) {
 
+   
     elem.addEventListener('mouseover',  function activate() {  
 
+        let isGifPlays = localStorage.getItem('isGifPlays');
+        if ( isGifPlays !== 'true') {
+            localStorage.setItem('isGifPlays', 'true');
+            let eggCount = localStorage.getItem('eggs');
+            if (eggCount) {
+                localStorage.setItem('eggs', (+eggCount + 1));
+                eggCount++;
+            } else {
+                localStorage.setItem('eggs', 1);
+                eggCount = 1;
+            }
 
-        let eggCount = localStorage.getItem('eggs');
-        if (eggCount)  localStorage.setItem('eggs', (+eggCount + 1))
-        else localStorage.setItem('eggs', 1);
-         
-        let src    = elem.getAttribute('src'),
-            newSrc = src.replace('.png', '.gif');
+            console.log(eggCount);
+            
+            if (!elem.getAttribute('data-png')) {
+                let src    = elem.getAttribute('src'),
+                    newSrc = src.replace('.png', '.gif');
 
-        let image_clone = new Image();
-        image_clone.src = newSrc;
-        image_clone.onload = function() {
-            elem.setAttribute('src', newSrc);
-            elem.className += '-gif';
+                let image_clone = new Image();
+                image_clone.src = newSrc;
+                image_clone.onload = function() {
+                    elem.setAttribute('src', newSrc);
+                    elem.className += '-gif';
+                }
+            } else {
+                elem.className += '-gif';
+            }
+
+            let cube         = thisDoc.querySelector('.header__cube-rotates'),
+                cubeSrc      = cube.getAttribute('src')
+                cubeSmoke    = new Image(),
+                cubeSmokeSrc = cubeSrc.replace(`cube-${eggCount-1}`, 'cube-open');
+            cubeSmoke.src = cubeSmokeSrc;
+            
+            setTimeout(function() {
+                cube.setAttribute('src', cubeSmokeSrc);
+                cube.className = 'header__cube';
+            }, +timeout - 1500)
+
+            setTimeout(function() {
+                elem.remove();
+            }, timeout);
+
+            setTimeout(function() {
+                cube.className = 'header__cube-rotates';
+                cube.setAttribute('src', cubeSrc.replace(`cube-${eggCount-1}`, `cube-${eggCount}`));
+                localStorage.setItem('isGifPlays', 'false');
+                if (eggCount === 6) activateButterfly(cube);
+            }, +timeout + 1500)     
+
+            elem.removeEventListener('mouseover', activate);
+            localStorage.setItem(string, true);
+
+        } else {
+            console.log('Wait until current gif end. ')
         }
-
-        let cube         = thisDoc.querySelector('.header__cube-rotates'),
-            cubeSrc      = cube.getAttribute('src')
-            cubeSmoke    = new Image(),
-            cubeSmokeSrc = cubeSrc.replace('cube-rotates', 'header-cube');
-        cubeSmoke.src = cubeSmokeSrc;
-        
-        setTimeout(function() {
-            cube.setAttribute('src', cubeSmokeSrc);
-            cube.className = 'header__cube';
-        }, +timeout - 1500)
-
-        setTimeout(function() {
-            elem.remove();
-        }, timeout);
-
-        setTimeout(function() {
-            cube.className = 'header__cube-rotates';
-            cube.setAttribute('src', cubeSrc);
-
-            if (eggCount == '3') activateButterfly(cube);
-        }, +timeout + 1500)
-        
-
-        elem.removeEventListener('mouseover', activate);
-        localStorage.setItem(string, true);
-
-        
-    });
+    }); 
 }
 
 
@@ -535,21 +561,26 @@ function activateButterfly(cube) {
             let batterfly = new Image();
             batterfly.src = '/img/butterfly.gif';
             batterfly.onload = function() {
-                let img = thisDoc.createElement('img');
-                img.setAttribute('src', batterfly.src);
-                img.className = 'header__butterfly';
-                img.setAttribute('style', 'display: none;')
-                thisDoc.querySelector('header').appendChild(img);
+                setTimeout(function() {
+                    let img = thisDoc.createElement('img');
+                    img.setAttribute('src', batterfly.src);
+                    img.className = 'header__butterfly';
+                    img.setAttribute('style', 'display: none;')
+                    thisDoc.querySelector('header').appendChild(img);
 
-                cube.className = 'header__cube';
-                cube.setAttribute('src', cubeSmokeSrc);     
-                setTimeout(function() {
-                    cube.remove();
-                    img.removeAttribute('style');
-                }, 1500);
-                setTimeout(function() {
-                    img.remove()
-                }, 9500)
+                    cube.className = 'header__cube';
+                    cube.setAttribute('src', cubeSmokeSrc);     
+                    setTimeout(function() {
+                        cube.remove();
+                        img.removeAttribute('style');
+                    }, 1500);
+                    
+                    setTimeout(function() {
+                        img.remove()
+                        thisDoc.querySelector('.header__butterfly-static').removeAttribute('style');
+                    }, 9500)
+                }, 2000)
+                
             } 
 
             localStorage.setItem('allEggs', true);
