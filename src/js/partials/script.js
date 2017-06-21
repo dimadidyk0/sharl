@@ -59,9 +59,9 @@ window.onload = function() {
             let 
                 steamInterval     = 500,
                 steamImages       = 8,
-                containerTimeout  = 7000,
-                mainTimeout       = 13000;
-            //  animationDuration = 10s (in CSS)
+                containerTimeout  = 6000,
+                mainTimeout       = 11000;
+            //  animationDuration = 8s (in CSS)
             //  main & container transition = 1s (in CSS)
 
             let firstImg = main.querySelector('img[src*=steam]');
@@ -574,7 +574,7 @@ function activateButterfly(cube) {
                         cube.remove();
                         img.removeAttribute('style');
                     }, 1500);
-                    
+
                     setTimeout(function() {
                         img.remove()
                         thisDoc.querySelector('.header__butterfly-static').removeAttribute('style');
@@ -943,8 +943,14 @@ var json = JSON.stringify( {
     }
 });
 
+
 function fillLocalStorage() {
-    if (localStorage.getItem('LOADED') === 'true') return null;
+
+    let date = new Date();
+    let today = `` + date.getFullYear() + date.getMonth() + date.getDate();
+
+    if (localStorage.getItem('LOADED') === today) return null;
+    
     let 
         parsedJSON  = JSON.parse(json),
         productKeys = Object.keys(parsedJSON["products"]),
@@ -995,8 +1001,10 @@ function fillLocalStorage() {
 
     localStorage.setItem('allProducts', productKeys);
     localStorage.setItem('json',        json);
-    localStorage.setItem('LOADED',      'true');
+    localStorage.setItem('LOADED',      today);
 }
+
+
 
 fillLocalStorage();
 
@@ -1077,7 +1085,7 @@ function getProductImages() {
         product     = JSON.parse(localStorage.getItem(urn));
         images      = product.images;
         
-    slider.innerHTML = '';
+    slider.innerHTML = '<span class="gallery-projector__layer"></span>';
     images.forEach(i => {
         let 
             li = thisDoc.createElement('li'),
@@ -1100,7 +1108,7 @@ function getProductVideo() {
         videoSrc    = product.video,
         projector   = slider.parentNode;
 
-    slider.innerHTML = '';
+    slider.innerHTML = '<span class="gallery-projector__layer"></span>';
     let 
         li      = thisDoc.createElement('li'),
         video   = thisDoc.createElement('video');
@@ -1154,13 +1162,15 @@ function buildProjectorSlider() {
 }
 function animateProjector( ) {
     let projector = thisDoc.querySelector('.gallery-projector__projector-sprite'),
-        animation = 'animation: projectorStart .6s  steps(1, end) infinite;';
+        animation = 'animation: projectorStart .6s  steps(1, end) infinite;',
+        layer = thisDoc.querySelector('.gallery-projector__layer');
     projector.setAttribute('style', 'display:none;')
 
     timeout = setTimeout(function() {
         projector.setAttribute('style', animation);
         setTimeout(function(){
             playProjector();
+            layer.classList.add('gallery-projector__layer--active');
         }, 600)
     },500)
 
@@ -1267,8 +1277,6 @@ function filterGellery() {
                 products = localStorage.getItem('allProducts');
             } else {
                 products = filterProducts(sizesArr, yearArr, categoryArr);
-
-                console.log(products)
             }
 
             localStorage.setItem('currentCategory', filters.category);
