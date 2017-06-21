@@ -154,25 +154,17 @@
 }
 
 .product__btn {
-    width: 138px;
-    height: 68px;
     box-sizing: border-box;
-    border-image: linear-gradient(to top right, 
-    #5D5858 0%, 
-    #FDF9F4 20%, 
-    #5D5858 50%, 
-    #FDF9F4 70%,
-    #5D5858 100%
-    ) 1;
-    border-width: 2px;
-    border-style: solid;   
-    box-shadow: inset 0px 0px 20px 1px #2b2b2b;
-    background-image: linear-gradient(to top right, #FDF9F4 0%, #6B6B6B 100%);
     cursor: pointer;
-    font: 28px/37px 'Playfair Display', serif;
+    font: 800 30px/37px 'Playfair Display', serif;
     text-transform: uppercase;
-    font-weight: 800;
-    color: #5D5858;
+    background: url(/img/buy-btn@1x.png);
+    border: navajowhite;
+    width: 179px;
+    height: 92px;
+    box-shadow: none;
+    padding: 40px 15px 40px 0;
+    color: #6A25EE;
 }
 .product__price {
     min-width: 170px;

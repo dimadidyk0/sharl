@@ -181,7 +181,51 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
     // #########################
 
     if (thisDoc.querySelector('.gallery__filter')) buildFilterForm();
-    if (thisDoc.querySelector('.categories')) buildCategories();
+    if (thisDoc.querySelector('.categories')) {
+        buildCategories();
+
+        let productForm = thisDoc.querySelector('#order-pop-up form');
+        if (productForm) {
+            var remove;
+            productForm.oninput = function() {
+                let img = thisDoc.querySelector('.place-order__img-container img');
+                img.style.opacity = '1';
+                off(remove);
+                on(img, remove);
+            }
+
+            let 
+                layout      = thisDoc.getElementById('layout'),
+                orderPopUp  = thisDoc.getElementById('order-pop-up'),
+                specRequest = thisDoc.querySelector('.special-request');
+                thankYou    = thisDoc.getElementById('thank');
+
+            specRequest.onclick = function() { 
+                showHideLayout(layout, orderPopUp);
+            };
+
+            layout.onclick   = function() { showHideLayout(layout, orderPopUp) };
+
+            productForm.onsubmit = function(e) {
+                e.preventDefault();
+                orderPopUp.removeAttribute('style');
+                thankYou.className = 'thank--active';
+
+                reloadGif(thankYou.querySelector('img'));
+
+                let a = setTimeout(function a() {
+                    thankYou.removeAttribute('class');
+                    clearTimeout(a);
+                } , 4000);
+
+                let b = setTimeout(function b() {
+                    layout.removeAttribute('style');
+                    clearTimeout(b);
+                } , 5000);
+
+            }
+        }
+    }
 
     if (thisDoc.querySelector('.product')) {
         
@@ -235,9 +279,21 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
                 layout      = thisDoc.getElementById('layout'),
                 orderPopUp  = thisDoc.getElementById('order-pop-up'),
                 orderBtn    = thisDoc.querySelector('input[type="button"]'),
+                specRequest = thisDoc.querySelector('.special-request');
                 thankYou    = thisDoc.getElementById('thank');
 
-            orderBtn.onclick = function() { showHideLayout(layout, orderPopUp) };
+            orderBtn.onclick = function() { 
+                let btn   = orderPopUp.querySelector('.place-order__submit');
+                btn.value = 'Order'; 
+                showHideLayout(layout, orderPopUp);
+            };
+
+            specRequest.onclick = function() { 
+                let btn   = orderPopUp.querySelector('.place-order__submit');
+                btn.value = 'Request'; 
+                showHideLayout(layout, orderPopUp);
+            };
+
             layout.onclick   = function() { showHideLayout(layout, orderPopUp) };
 
             productForm.onsubmit = function(e) {
@@ -245,9 +301,7 @@ thisDoc.addEventListener("DOMContentLoaded", function() {
                 orderPopUp.removeAttribute('style');
                 thankYou.className = 'thank--active';
 
-                let img = thankYou.querySelector('img'),
-                    src = img.getAttribute('src');  
-                img.setAttribute('src', src);
+                reloadGif(thankYou.querySelector('img'));
 
                 let a = setTimeout(function a() {
                     thankYou.removeAttribute('class');
@@ -950,7 +1004,7 @@ function fillLocalStorage() {
     let today = `` + date.getFullYear() + date.getMonth() + date.getDate();
 
     if (localStorage.getItem('LOADED') === today) return null;
-    
+
     let 
         parsedJSON  = JSON.parse(json),
         productKeys = Object.keys(parsedJSON["products"]),
@@ -1118,8 +1172,8 @@ function getProductVideo() {
     video.setAttribute('autobuffer', '');
     video.innerHTML = 
     `
-        <source src="${videoSrc}.webm" type="video/webm">
         <source src="${videoSrc}.mp4" type="video/mp4">
+        <source src="${videoSrc}.webm" type="video/webm">
         <source src="${videoSrc}.ogv" type="video/ogg">
     `;
 
@@ -1356,19 +1410,21 @@ function buildSlider() {
         })
     }
 
-    let galleryList = Array.from(document.querySelectorAll('.gridzyItemContent'));
-    galleryList.forEach(b => {
-
+    elements.forEach(b => {
         let video = b.querySelector('video');
         b.onmouseover = function() {video.play();}
         b.onmouseout  = function() {video.pause();}
+    })
+
+
+    let galleryList = Array.from(document.querySelectorAll('.gridzyItemContent'));
+    galleryList.forEach(b => {
 
         let 
             title         = b.querySelector('h3'),
             blockW        = b.clientWidth,
             blockH        = b.clientHeight,
             textContainer = b.querySelector('div');
-
 
         if (blockH > blockW) {
             textContainer.style.alignItems  = 'flex-start';
@@ -1427,8 +1483,8 @@ function buildGallery() {
                 </div>
                 <div class="gridzy__video-container">
                     <video muted class="category-item__video">
-                        <source src="${obj.video}.webm" type="video/webm">
                         <source src="${obj.video}.mp4" type="video/mp4">
+                        <source src="${obj.video}.webm" type="video/webm">
                         <source src="${obj.video}.ogv" type="video/ogg">
                     </video>
                 </div>
@@ -1505,8 +1561,8 @@ function buildCategories() {
         `
             
             <video muted class="category-item__video">
-                <source src="${obj.video}.webm" type="video/webm">
                 <source src="${obj.video}.mp4" type="video/mp4">
+                <source src="${obj.video}.webm" type="video/webm">
                 <source src="${obj.video}.ogv" type="video/ogg">
             </video>
             <div class="category-item__text-block">
@@ -1570,8 +1626,8 @@ function buildProductCard() {
                     ${list.innerHTML || ''}
                     <li>
                         <video muted controls>
-                            <source src="${obj.video}.webm" type="video/webm">
                             <source src="${obj.video}.mp4" type="video/mp4">
+                            <source src="${obj.video}.webm" type="video/webm">
                             <source src="${obj.video}.ogv" type="video/ogg">
                         </video>
                     </li>
@@ -1597,8 +1653,8 @@ function buildProductCard() {
             ${list.innerHTML || ''}
             <li>
                 <video muted class="category-item__video">
-                    <source src="${obj.video}.webm" type="video/webm">
                     <source src="${obj.video}.mp4" type="video/mp4">
+                    <source src="${obj.video}.webm" type="video/webm">
                     <source src="${obj.video}.ogv" type="video/ogg">
                 </video>
             </li>
